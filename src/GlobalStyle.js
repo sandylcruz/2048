@@ -33,7 +33,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 10px;
   }
   body {
-    background-color: #f2e9e4;
+    background-color: #edf2f4;
   }
 `;
 

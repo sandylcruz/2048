@@ -5,11 +5,9 @@ import Tile from "./Tile";
 
 const RowContainer = styled.div`
   max-width: 500px;
-  border: 1px solid black;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
 `;
 
 const Row = () => {
