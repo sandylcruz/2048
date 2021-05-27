@@ -1,7 +1,3 @@
-import React from "react";
-
-const Row = () => {
-  return <div>This is the Row component</div>;
-};
+const Row = () => {};
 
 export default Row;
