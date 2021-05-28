@@ -10,13 +10,12 @@ const RowContainer = styled.div`
   justify-content: space-between;
 `;
 
-const Row = () => {
+const Row = ({ row }) => {
   return (
     <RowContainer>
-      <Tile />
-      <Tile />
-      <Tile />
-      <Tile />
+      {row.map((tile, index) => (
+        <Tile key={index} value={tile} />
+      ))}
     </RowContainer>
   );
 };

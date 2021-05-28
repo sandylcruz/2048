@@ -20,14 +20,12 @@ const StyledTile = styled.div`
   }
 `;
 
-const Tile = () => {
+const Tile = ({ value }) => {
   const [tileScore, setTileScore] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <StyledTile>
-      <StyledH1>Hi</StyledH1>
-    </StyledTile>
+    <StyledTile>{value === 0 ? null : <StyledH1>{value}</StyledH1>}</StyledTile>
   );
 };
 

@@ -9,18 +9,35 @@ const BoardContainer = styled.div`
   align-items: center;
 `;
 
-const Board = () => {
+const Board = ({ grid }) => {
   const addTileToBoard = () => {};
   const compressEqualValueTiles = () => {};
 
+  // const grid = [];
+  // for (let row = 0; row <= 4; row++) {
+  //   grid.push([]);
+  //   for (let col = 0; col < 4; col++) {
+  //     grid[row].push(<Row key={`${col}${row}`} />);
+  //   }
+  // }
+  // console.log(grid);
+
   return (
     <BoardContainer>
-      <Row />
-      <Row />
-      <Row />
-      <Row />
+      {grid.map((row, index) => (
+        <Row key={index} row={row} />
+      ))}
     </BoardContainer>
   );
+
+  // return (
+  //   <BoardContainer>
+  //     <Row />
+  //     <Row />
+  //     <Row />
+  //     <Row />
+  //   </BoardContainer>
+  // );
 };
 
 export default Board;
