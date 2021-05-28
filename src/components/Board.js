@@ -10,6 +10,9 @@ const BoardContainer = styled.div`
 `;
 
 const Board = () => {
+  const addTileToBoard = () => {};
+  const compressEqualValueTiles = () => {};
+
   return (
     <BoardContainer>
       <Row />

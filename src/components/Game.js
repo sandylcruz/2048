@@ -4,7 +4,7 @@ import Board from "./Board";
 
 const Game = () => {
   const [board, setBoard] = useState("");
-  const [score, setScore] = useState(0);
+  const [totalScore, setTotalScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
 
   return <Board />;

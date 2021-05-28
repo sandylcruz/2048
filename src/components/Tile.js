@@ -11,11 +11,18 @@ const StyledTile = styled.div`
   border: 5px solid #4a4e69;
   width: 100px;
   height: 100px;
+  &:nth-child(1) {
+    border-left: 10px solid #4a4e69;
+  }
+
+  &:nth-child(4) {
+    border-right: 10px solid #4a4e69;
+  }
 `;
 
 const Tile = () => {
   const [tileScore, setTileScore] = useState(0);
-  const [isActive, setIsActive]
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <StyledTile>
