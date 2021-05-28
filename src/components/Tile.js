@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const StyledH1 = styled.div`
@@ -14,6 +14,9 @@ const StyledTile = styled.div`
 `;
 
 const Tile = () => {
+  const [tileScore, setTileScore] = useState(0);
+  const [isActive, setIsActive]
+
   return (
     <StyledTile>
       <StyledH1>Hi</StyledH1>

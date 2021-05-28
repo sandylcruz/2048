@@ -1,8 +1,10 @@
-import Board from "./components/Board";
-
+import React from "react";
 import styled from "styled-components";
 
-import GlobalStyle from "./GlobalStyle";
+// import Board from "./Board";
+import Game from "./Game";
+
+import GlobalStyle from "../GlobalStyle";
 
 const BodyDiv = styled.div`
   height: 100%;
@@ -33,15 +35,17 @@ const StyledH3 = styled.h3`
   font-size: 25px;
 `;
 
-const StyledH4 = styled.h4`
-  font-size: 15px;
-`;
+// const StyledH4 = styled.h4`
+//   font-size: 15px;
+// `;
 
-const TitleContainer = styled.div`
-
-`;
+const TitleContainer = styled.div``;
 
 const App = () => {
+  // const [state, setState] = useState("");
+
+  // const handler = (event) => {};
+
   return (
     <BodyDiv>
       <GlobalStyle />
@@ -54,7 +58,7 @@ const App = () => {
           {/* <StyledH4>1000</StyledH4> */}
         </ScoreContainer>
       </HeaderDiv>
-      <Board />
+      <Game />
     </BodyDiv>
   );
 };
