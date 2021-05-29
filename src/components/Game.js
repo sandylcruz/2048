@@ -5,12 +5,11 @@ import Board from "./Board";
 import { selectGrid } from "../reducers/selectors";
 
 const Game = () => {
-  const [board, setBoard] = useState("");
-  const [totalScore, setTotalScore] = useState(0);
-  const [bestScore, setBestScore] = useState(0);
+  // const [board, setBoard] = useState("");
+  // const [totalScore, setTotalScore] = useState(0);
+  // const [bestScore, setBestScore] = useState(0);
 
   const grid = useSelector(selectGrid);
-  console.log(grid);
 
   return <Board grid={grid} />;
 };

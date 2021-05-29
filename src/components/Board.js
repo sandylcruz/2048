@@ -10,8 +10,8 @@ const BoardContainer = styled.div`
 `;
 
 const Board = ({ grid }) => {
-  const addTileToBoard = () => {};
-  const compressEqualValueTiles = () => {};
+  // const addTileToBoard = () => {};
+  // const compressEqualValueTiles = () => {};
 
   // const grid = [];
   // for (let row = 0; row <= 4; row++) {

@@ -1,4 +1,5 @@
 import boardReducer from "../boardReducer";
+import { MOVE_LEFT } from "../../actions/boardActions";
 
 describe("board reducer", () => {
   it("has the correct initial state", () => {
@@ -33,11 +34,11 @@ describe("board reducer", () => {
 
   describe("movement transitions", () => {
     describe("when moving left", () => {
-      it("moves tiles to the correct place", () => {
+      fit("moves tiles to the correct place", () => {
         const mockState = {
           score: 0,
           grid: [
-            [2, 0, 0, 0],
+            [0, 2, 0, 0],
             [0, 2, 0, 0],
             [0, 0, 0, 2],
             [0, 0, 2, 0],
@@ -46,7 +47,7 @@ describe("board reducer", () => {
         };
 
         const result = boardReducer(mockState, {
-          type: "moveLeft",
+          type: MOVE_LEFT,
         });
 
         expect(result).toEqual({
@@ -60,9 +61,93 @@ describe("board reducer", () => {
           bestScore: null,
         });
       });
+
+      fit("doesn't combine non-like numbers", () => {
+        const mockState = {
+          score: 0,
+          grid: [
+            [0, 2, 4, 0],
+            [0, 2, 0, 0],
+            [4, 0, 0, 2],
+            [0, 0, 2, 4],
+          ],
+          bestScore: null,
+        };
+
+        const result = boardReducer(mockState, {
+          type: MOVE_LEFT,
+        });
+
+        expect(result).toEqual({
+          score: 0,
+          grid: [
+            [2, 4, 0, 0],
+            [2, 0, 0, 0],
+            [4, 2, 0, 0],
+            [2, 4, 0, 0],
+          ],
+          bestScore: null,
+        });
+      });
+
+      fit("doesn't combine 3 non-like numbers", () => {
+        const mockState = {
+          score: 0,
+          grid: [
+            [0, 2, 4, 2],
+            [0, 2, 0, 0],
+            [4, 0, 0, 2],
+            [0, 0, 2, 4],
+          ],
+          bestScore: null,
+        };
+
+        const result = boardReducer(mockState, {
+          type: MOVE_LEFT,
+        });
+
+        expect(result).toEqual({
+          score: 0,
+          grid: [
+            [2, 4, 2, 0],
+            [2, 0, 0, 0],
+            [4, 2, 0, 0],
+            [2, 4, 0, 0],
+          ],
+          bestScore: null,
+        });
+      });
+
+      fit("updates the score", () => {
+        const mockState = {
+          score: 0,
+          grid: [
+            [0, 2, 2, 0],
+            [0, 2, 0, 0],
+            [0, 0, 0, 2],
+            [0, 0, 2, 0],
+          ],
+          bestScore: null,
+        };
+
+        const result = boardReducer(mockState, {
+          type: MOVE_LEFT,
+        });
+
+        expect(result).toEqual({
+          score: 4,
+          grid: [
+            [4, 0, 0, 0],
+            [2, 0, 0, 0],
+            [2, 0, 0, 0],
+            [2, 0, 0, 0],
+          ],
+          bestScore: null,
+        });
+      });
     });
 
-    describe("when moving right", () => {
+    xdescribe("when moving right", () => {
       it("moves tiles to the correct place", () => {
         const mockState = {
           score: 0,
@@ -92,7 +177,7 @@ describe("board reducer", () => {
       });
     });
 
-    describe("when moving up", () => {
+    xdescribe("when moving up", () => {
       it("moves tiles to the correct place", () => {
         const mockState = {
           score: 0,
@@ -122,7 +207,7 @@ describe("board reducer", () => {
       });
     });
 
-    describe("when moving down", () => {
+    xdescribe("when moving down", () => {
       it("moves tiles to the correct place", () => {
         const mockState = {
           score: 0,
