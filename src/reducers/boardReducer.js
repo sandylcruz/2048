@@ -5,7 +5,7 @@
 //   moveRight,
 //   addTile,
 // } from "../actions/boardActions";
-import { MOVE_LEFT, MOVE_RIGHT } from "../actions/boardActions";
+import { MOVE_LEFT, MOVE_RIGHT, MOVE_UP } from "../actions/boardActions";
 
 const newBoard = [
   [0, 0, 0, 0],
@@ -33,6 +33,11 @@ const initialState = {
   grid: newBoard,
   score: 0,
   bestScore: null,
+};
+
+const getColumnsFromMatrix = (matrix) => {
+  let [row] = matrix;
+  return row.map((value, column) => matrix.map((row) => row[column]));
 };
 
 const tiltRowLeft = (row) => {
@@ -110,6 +115,14 @@ const tiltRowRight = (row) => {
   };
 };
 
+const tiltColumnUp = (column) => {
+  const nextColumn = [...column];
+  let i = 0;
+  let j = 0;
+  let points = 0;
+  let hasSwapped = false;
+};
+
 const boardReducer = (state = initialState, action) => {
   switch (action.type) {
     case MOVE_LEFT: {
@@ -133,6 +146,24 @@ const boardReducer = (state = initialState, action) => {
       nextGrid.forEach((row, index) => {
         const { nextRow, points } = tiltRowRight(row);
         nextGrid[index] = nextRow;
+        newPoints += points;
+      });
+
+      return {
+        ...state,
+        grid: nextGrid,
+        score: state.score + newPoints,
+      };
+    }
+
+    case MOVE_UP: {
+      const nextGrid = [...state.grid];
+      let newPoints = 0;
+      const columns = getColumnsFromMatrix(nextGrid);
+
+      nextGrid.forEach((column, index) => {
+        const { nextColumn, points } = tiltColumnUp(column);
+        nextGrid[index] = nextColumn;
         newPoints += points;
       });
 

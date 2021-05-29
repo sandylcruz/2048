@@ -1,5 +1,5 @@
 import boardReducer from "../boardReducer";
-import { MOVE_LEFT, MOVE_RIGHT } from "../../actions/boardActions";
+import { MOVE_LEFT, MOVE_RIGHT, MOVE_UP } from "../../actions/boardActions";
 
 describe("board reducer", () => {
   it("has the correct initial state", () => {
@@ -204,7 +204,7 @@ describe("board reducer", () => {
     });
 
     describe("when moving right", () => {
-      fit("moves tiles to the correct place", () => {
+      fit("moves tiles to the correct right place", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -345,30 +345,142 @@ describe("board reducer", () => {
       });
     });
 
-    xdescribe("when moving up", () => {
-      it("moves tiles to the correct place", () => {
+    describe("when moving up", () => {
+      fit("moves tiles to the correct place at the top", () => {
         const mockState = {
           score: 0,
           grid: [
-            [2, 2, 2, 2],
+            [0, 0, 0, 2],
+            [0, 0, 2, 0],
+            [0, 2, 0, 0],
+            [2, 2, 0, 0],
+          ],
+          bestScore: null,
+        };
+
+        const result = boardReducer(mockState, {
+          type: MOVE_UP,
+        });
+
+        expect(result).toEqual({
+          score: 0,
+          grid: [
+            [2, 4, 2, 2],
             [0, 0, 0, 0],
             [0, 0, 0, 0],
+            [0, 0, 0, 0],
+          ],
+          bestScore: null,
+        });
+      });
+
+      fit("doesn't combine non-like numbers", () => {
+        const mockState = {
+          score: 0,
+          grid: [
+            [0, 2, 4, 0],
+            [0, 4, 0, 0],
+            [4, 0, 0, 2],
             [0, 0, 0, 0],
           ],
           bestScore: null,
         };
 
         const result = boardReducer(mockState, {
-          type: "moveUp",
+          type: MOVE_UP,
         });
 
         expect(result).toEqual({
           score: 0,
           grid: [
-            [2, 0, 0, 0],
-            [2, 0, 0, 0],
-            [2, 0, 0, 0],
-            [2, 0, 0, 0],
+            [4, 2, 4, 2],
+            [0, 4, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+          ],
+          bestScore: null,
+        });
+      });
+
+      fit("handles cases where the non-zero number is at the top already", () => {
+        const mockState = {
+          score: 0,
+          grid: [
+            [0, 2, 4, 0],
+            [0, 2, 0, 0],
+            [4, 0, 0, 2],
+            [0, 0, 0, 2],
+          ],
+          bestScore: null,
+        };
+
+        const result = boardReducer(mockState, {
+          type: MOVE_UP,
+        });
+
+        expect(result).toEqual({
+          score: 0,
+          grid: [
+            [4, 4, 4, 2],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+          ],
+          bestScore: null,
+        });
+      });
+
+      fit("doesn't combine 3 non-like numbers", () => {
+        const mockState = {
+          score: 0,
+          grid: [
+            [0, 2, 4, 2],
+            [0, 2, 0, 4],
+            [4, 0, 0, 0],
+            [0, 0, 2, 2],
+          ],
+          bestScore: null,
+        };
+
+        const result = boardReducer(mockState, {
+          type: MOVE_UP,
+        });
+
+        expect(result).toEqual({
+          score: 0,
+          grid: [
+            [4, 4, 4, 2],
+            [0, 0, 2, 4],
+            [0, 0, 0, 2],
+            [0, 0, 0, 0],
+          ],
+          bestScore: null,
+        });
+      });
+
+      fit("updates the score", () => {
+        const mockState = {
+          score: 0,
+          grid: [
+            [0, 2, 2, 0],
+            [0, 2, 0, 0],
+            [0, 0, 0, 2],
+            [0, 0, 0, 0],
+          ],
+          bestScore: null,
+        };
+
+        const result = boardReducer(mockState, {
+          type: MOVE_UP,
+        });
+
+        expect(result).toEqual({
+          score: 4,
+          grid: [
+            [0, 4, 2, 2],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
           ],
           bestScore: null,
         });
