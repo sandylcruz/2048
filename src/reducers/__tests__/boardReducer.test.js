@@ -61,6 +61,96 @@ describe("board reducer", () => {
         });
       });
     });
+
+    describe("when moving right", () => {
+      it("moves tiles to the correct place", () => {
+        const mockState = {
+          score: 0,
+          grid: [
+            [2, 0, 0, 0],
+            [0, 2, 0, 0],
+            [0, 0, 0, 2],
+            [0, 0, 2, 0],
+          ],
+          bestScore: null,
+        };
+
+        const result = boardReducer(mockState, {
+          type: "moveRight",
+        });
+
+        expect(result).toEqual({
+          score: 0,
+          grid: [
+            [0, 0, 0, 2],
+            [0, 0, 0, 2],
+            [0, 0, 0, 2],
+            [0, 0, 0, 2],
+          ],
+          bestScore: null,
+        });
+      });
+    });
+
+    describe("when moving up", () => {
+      it("moves tiles to the correct place", () => {
+        const mockState = {
+          score: 0,
+          grid: [
+            [2, 2, 2, 2],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+          ],
+          bestScore: null,
+        };
+
+        const result = boardReducer(mockState, {
+          type: "moveUp",
+        });
+
+        expect(result).toEqual({
+          score: 0,
+          grid: [
+            [2, 0, 0, 0],
+            [2, 0, 0, 0],
+            [2, 0, 0, 0],
+            [2, 0, 0, 0],
+          ],
+          bestScore: null,
+        });
+      });
+    });
+
+    describe("when moving down", () => {
+      it("moves tiles to the correct place", () => {
+        const mockState = {
+          score: 0,
+          grid: [
+            [2, 0, 0, 0],
+            [0, 2, 0, 0],
+            [0, 0, 0, 2],
+            [0, 0, 2, 0],
+          ],
+          bestScore: null,
+        };
+
+        const result = boardReducer(mockState, {
+          type: "moveDown",
+        });
+
+        expect(result).toEqual({
+          score: 0,
+          grid: [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [2, 2, 2, 2],
+          ],
+          bestScore: null,
+        });
+      });
+    });
   });
 });
 
