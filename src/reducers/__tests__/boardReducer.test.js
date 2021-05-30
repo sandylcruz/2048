@@ -1,5 +1,10 @@
 import boardReducer from "../boardReducer";
-import { MOVE_LEFT, MOVE_RIGHT, MOVE_UP } from "../../actions/boardActions";
+import {
+  MOVE_DOWN,
+  MOVE_LEFT,
+  MOVE_RIGHT,
+  MOVE_UP,
+} from "../../actions/boardActions";
 
 describe("board reducer", () => {
   it("has the correct initial state", () => {
@@ -146,7 +151,7 @@ describe("board reducer", () => {
         });
       });
 
-      it("it handles empty rows", () => {
+      it("handles empty rows", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -174,7 +179,7 @@ describe("board reducer", () => {
         });
       });
 
-      it("it handles cases where non-zero number is far left", () => {
+      it("handles cases where non-zero number is far left", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -501,7 +506,7 @@ describe("board reducer", () => {
         };
 
         const result = boardReducer(mockState, {
-          type: "moveDown",
+          type: MOVE_DOWN,
         });
 
         expect(result).toEqual({
@@ -529,7 +534,7 @@ describe("board reducer", () => {
         };
 
         const result = boardReducer(mockState, {
-          type: MOVE_UP,
+          type: MOVE_DOWN,
         });
 
         expect(result).toEqual({
@@ -557,7 +562,7 @@ describe("board reducer", () => {
         };
 
         const result = boardReducer(mockState, {
-          type: MOVE_UP,
+          type: MOVE_DOWN,
         });
 
         expect(result).toEqual({
@@ -585,7 +590,7 @@ describe("board reducer", () => {
         };
 
         const result = boardReducer(mockState, {
-          type: MOVE_UP,
+          type: MOVE_DOWN,
         });
 
         expect(result).toEqual({
@@ -613,7 +618,7 @@ describe("board reducer", () => {
         };
 
         const result = boardReducer(mockState, {
-          type: MOVE_UP,
+          type: MOVE_DOWN,
         });
 
         expect(result).toEqual({
