@@ -1,4 +1,5 @@
 import {
+  ADD_TILE,
   MOVE_DOWN,
   MOVE_LEFT,
   MOVE_RIGHT,
@@ -16,13 +17,23 @@ const generateRandomCoordinate = () => {
   return [Math.floor(Math.random() * 4), Math.floor(Math.random() * 4)];
 };
 
-const randomCoordinates = [
-  generateRandomCoordinate(),
-  generateRandomCoordinate(),
-];
+const coordinateOne = generateRandomCoordinate();
+let coordinateTwo = generateRandomCoordinate();
+
+while (
+  coordinateTwo[0] === coordinateOne[0] &&
+  coordinateTwo[1] === coordinateOne[1]
+) {
+  coordinateTwo = generateRandomCoordinate();
+}
+
+const randomCoordinates = [coordinateOne, coordinateTwo];
+const randomNumber = () => {
+  return Math.random() < 0.9 ? 2 : 4;
+};
 
 randomCoordinates.forEach((coordinate) => {
-  const number = Math.random() < 0.9 ? 2 : 4;
+  const number = randomNumber();
   const [i, j] = coordinate;
   newBoard[i][j] = number;
 });
@@ -31,6 +42,16 @@ const initialState = {
   grid: newBoard,
   score: 0,
   bestScore: null,
+};
+
+const addTile = (grid) => {
+  const nextGrid = [];
+  const number = Math.random() < 0.9 ? 2 : 4;
+  const coordinate = generateRandomCoordinate;
+  const [i, j] = coordinate;
+  nextGrid[i][j] = number;
+
+  return nextGrid;
 };
 
 const tiltGridDown = (grid) => {
@@ -254,38 +275,36 @@ const boardReducer = (state = initialState, action) => {
       };
     }
 
-    // case "UP":
-    //   const upResult = moveUp(state.grid);
-    //   return {
-    //     ...state,
-    //     upResult,
-    //   };
-    // case "DOWN":
-    //   const downResult = moveDown(state.grid);
-    //   return {
-    //     ...state,
-    //     downResult,
-    //   };
-    // case "RIGHT":
-    //   const rightResult = moveRight(state.grid);
-    //   return {
-    //     ...state,
-    //     rightResult,
-    //   };
-    // case "LEFT":
-    //   const leftResult = moveLeft(state.grid);
-    //   return {
-    //     ...state,
-    //     leftResult,
-    //   };
-    // case "ADD_TILE":
-    //   const newTile = addTile();
-    //   return {
-    //     ...state,
-    //     newTile,
-    //   };
-    // case "RESTART":
-    //   return state;
+    case ADD_TILE: {
+      const nextGrid = [...state.grid];
+
+      const emptyCoordinates = [];
+
+      nextGrid.forEach((row, i) => {
+        row.forEach((item, j) => {
+          if (item === 0) {
+            emptyCoordinates.push([i, j]);
+          }
+        });
+      });
+
+      const randomEmptyCoordinateIndex = Math.floor(
+        Math.random() * emptyCoordinates.length
+      );
+      const randomEmptyCoordinate =
+        emptyCoordinates[randomEmptyCoordinateIndex];
+
+      const number = randomNumber();
+
+      const [i, j] = randomEmptyCoordinate;
+      nextGrid[i][j] = number;
+
+      return {
+        ...state,
+        grid: nextGrid,
+      };
+    }
+
     default:
       return state;
   }
