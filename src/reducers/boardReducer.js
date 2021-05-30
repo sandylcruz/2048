@@ -44,16 +44,6 @@ const initialState = {
   bestScore: null,
 };
 
-const addTile = (grid) => {
-  const nextGrid = [];
-  const number = Math.random() < 0.9 ? 2 : 4;
-  const coordinate = generateRandomCoordinate;
-  const [i, j] = coordinate;
-  nextGrid[i][j] = number;
-
-  return nextGrid;
-};
-
 const tiltGridDown = (grid) => {
   const nextGrid = [];
 

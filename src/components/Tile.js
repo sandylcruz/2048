@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const StyledH1 = styled.div`
@@ -21,9 +21,6 @@ const StyledTile = styled.div`
 `;
 
 const Tile = ({ value }) => {
-  // const [tileScore, setTileScore] = useState(0);
-  // const [isActive, setIsActive] = useState(false);
-
   return (
     <StyledTile>{value === 0 ? null : <StyledH1>{value}</StyledH1>}</StyledTile>
   );

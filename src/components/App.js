@@ -1,9 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import Game from "./Game";
-
 import GlobalStyle from "../GlobalStyle";
+import { selectPoints } from "../reducers/selectors";
 
 const AboveGame = styled.div`
   display: flex;
@@ -64,9 +65,7 @@ const TitleContainer = styled.div`
 `;
 
 const App = () => {
-  // const [state, setState] = useState("");
-
-  // const handler = (event) => {};
+  const score = useSelector(selectPoints);
 
   return (
     <BodyDiv>
@@ -79,7 +78,7 @@ const App = () => {
             </TitleContainer>
             <ScoreContainer>
               <StyledH3>SCORE</StyledH3>
-              <StyledH4>1000</StyledH4>
+              <StyledH4>{score}</StyledH4>
             </ScoreContainer>
           </HeaderDiv>
           <AboveGame>
