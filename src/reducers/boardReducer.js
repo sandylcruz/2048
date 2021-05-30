@@ -35,10 +35,23 @@ const initialState = {
   bestScore: null,
 };
 
-const getColumnsFromMatrix = (matrix) => {
-  let [row] = matrix;
-  return row.map((value, column) => matrix.map((row) => row[column]));
-};
+// const getColumnsFromMatrix = (matrix) => {
+//   let [row] = matrix;
+//   return row.map((value, column) => matrix.map((row) => row[column]));
+// };
+
+// const getColumnsFromMatrix = (matrix) => {
+//   const result = [];
+
+//   for (let i = 0; i < matrix[0].length; i++) {
+//     const column = [];
+//     for (let j = 0; j < matrix.length; j++) {
+//       column.push(matrix[j][i]);
+//     }
+//     result.push(column);
+//   }
+//   return result;
+// };
 
 const tiltRowLeft = (row) => {
   const nextRow = [...row];
@@ -115,12 +128,55 @@ const tiltRowRight = (row) => {
   };
 };
 
-const tiltColumnUp = (column) => {
-  const nextColumn = [...column];
-  let i = 0;
-  let j = 0;
+const tiltGridUp = (grid) => {
+  const nextGrid = [];
+
+  grid.forEach((row) => {
+    const nextRow = [...row];
+    nextGrid.push(nextRow);
+  });
+
+  let n = 0;
   let points = 0;
-  let hasSwapped = false;
+
+  while (n < nextGrid.length) {
+    console.log("n", n);
+    let i = 0;
+    let j = 1;
+    while (j < nextGrid.length) {
+      if (n === 1) {
+        console.log(i, j);
+      }
+      if (nextGrid[i][n] === 0 && nextGrid[j][n] === 0) {
+        j++;
+      } else if (nextGrid[i][n] === 0) {
+        nextGrid[i][n] = nextGrid[j][n];
+        nextGrid[j][n] = 0;
+        j++;
+      } else if (nextGrid[i][n] === nextGrid[j][n]) {
+        nextGrid[i][n] = nextGrid[i][n] + nextGrid[j][n];
+        nextGrid[j][n] = 0;
+        points += nextGrid[i][n];
+        i++;
+        j++;
+      } else if (nextGrid[i][n] !== 0 && nextGrid[j][n] !== 0 && j - i !== 1) {
+        i++;
+        nextGrid[i][n] = nextGrid[j][n];
+        nextGrid[j][n] = 0;
+        j++;
+      } else if (nextGrid[i][n] !== 0 && nextGrid[j][n] !== 0 && j - i === 1) {
+        i++;
+        j++;
+      } else {
+        j++;
+      }
+    }
+    n++;
+  }
+  return {
+    grid: nextGrid,
+    points,
+  };
 };
 
 const boardReducer = (state = initialState, action) => {
@@ -157,20 +213,12 @@ const boardReducer = (state = initialState, action) => {
     }
 
     case MOVE_UP: {
-      const nextGrid = [...state.grid];
-      let newPoints = 0;
-      const columns = getColumnsFromMatrix(nextGrid);
-
-      nextGrid.forEach((column, index) => {
-        const { nextColumn, points } = tiltColumnUp(column);
-        nextGrid[index] = nextColumn;
-        newPoints += points;
-      });
+      const { grid, points } = tiltGridUp(state.grid);
 
       return {
         ...state,
-        grid: nextGrid,
-        score: state.score + newPoints,
+        grid: grid,
+        score: state.score + points,
       };
     }
 

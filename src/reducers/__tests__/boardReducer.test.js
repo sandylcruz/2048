@@ -34,7 +34,7 @@ describe("board reducer", () => {
 
   describe("movement transitions", () => {
     describe("when moving left", () => {
-      fit("moves tiles to the correct place", () => {
+      it("moves tiles to the correct place", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -62,7 +62,7 @@ describe("board reducer", () => {
         });
       });
 
-      fit("doesn't combine non-like numbers", () => {
+      it("doesn't combine non-like numbers", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -90,7 +90,7 @@ describe("board reducer", () => {
         });
       });
 
-      fit("doesn't combine 3 non-like numbers", () => {
+      it("doesn't combine 3 non-like numbers", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -118,7 +118,7 @@ describe("board reducer", () => {
         });
       });
 
-      fit("updates the score", () => {
+      it("updates the score", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -146,7 +146,7 @@ describe("board reducer", () => {
         });
       });
 
-      fit("it handles empty rows", () => {
+      it("it handles empty rows", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -174,7 +174,7 @@ describe("board reducer", () => {
         });
       });
 
-      fit("it handles cases where non-zero number is far left", () => {
+      it("it handles cases where non-zero number is far left", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -204,7 +204,7 @@ describe("board reducer", () => {
     });
 
     describe("when moving right", () => {
-      fit("moves tiles to the correct right place", () => {
+      it("moves tiles to the correct right place", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -232,7 +232,7 @@ describe("board reducer", () => {
         });
       });
 
-      fit("doesn't combine non-like numbers", () => {
+      it("doesn't combine non-like numbers", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -260,7 +260,7 @@ describe("board reducer", () => {
         });
       });
 
-      fit("handles cases where the non-zero number is far right already", () => {
+      it("handles cases where the non-zero number is far right already", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -288,7 +288,7 @@ describe("board reducer", () => {
         });
       });
 
-      fit("doesn't combine 3 non-like numbers", () => {
+      it("doesn't combine 3 non-like numbers", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -316,7 +316,7 @@ describe("board reducer", () => {
         });
       });
 
-      fit("updates the score", () => {
+      it("updates the score", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -346,14 +346,14 @@ describe("board reducer", () => {
     });
 
     describe("when moving up", () => {
-      fit("moves tiles to the correct place at the top", () => {
+      it("moves tiles to the correct place at the top", () => {
         const mockState = {
           score: 0,
           grid: [
             [0, 0, 0, 2],
             [0, 0, 2, 0],
             [0, 2, 0, 0],
-            [2, 2, 0, 0],
+            [2, 0, 0, 0],
           ],
           bestScore: null,
         };
@@ -365,7 +365,7 @@ describe("board reducer", () => {
         expect(result).toEqual({
           score: 0,
           grid: [
-            [2, 4, 2, 2],
+            [2, 2, 2, 2],
             [0, 0, 0, 0],
             [0, 0, 0, 0],
             [0, 0, 0, 0],
@@ -374,13 +374,13 @@ describe("board reducer", () => {
         });
       });
 
-      fit("doesn't combine non-like numbers", () => {
+      it("doesn't combine non-like numbers", () => {
         const mockState = {
           score: 0,
           grid: [
-            [0, 2, 4, 0],
+            [0, 2, 2, 0],
             [0, 4, 0, 0],
-            [4, 0, 0, 2],
+            [2, 0, 0, 2],
             [0, 0, 0, 0],
           ],
           bestScore: null,
@@ -393,7 +393,7 @@ describe("board reducer", () => {
         expect(result).toEqual({
           score: 0,
           grid: [
-            [4, 2, 4, 2],
+            [2, 2, 2, 2],
             [0, 4, 0, 0],
             [0, 0, 0, 0],
             [0, 0, 0, 0],
@@ -402,7 +402,7 @@ describe("board reducer", () => {
         });
       });
 
-      fit("handles cases where the non-zero number is at the top already", () => {
+      it("handles cases where the non-zero number is at the top already", () => {
         const mockState = {
           score: 0,
           grid: [
@@ -419,9 +419,9 @@ describe("board reducer", () => {
         });
 
         expect(result).toEqual({
-          score: 0,
+          score: 8,
           grid: [
-            [4, 4, 4, 2],
+            [4, 4, 4, 4],
             [0, 0, 0, 0],
             [0, 0, 0, 0],
             [0, 0, 0, 0],
@@ -430,14 +430,14 @@ describe("board reducer", () => {
         });
       });
 
-      fit("doesn't combine 3 non-like numbers", () => {
+      it("doesn't combine 3 non-like numbers", () => {
         const mockState = {
           score: 0,
           grid: [
             [0, 2, 4, 2],
             [0, 2, 0, 4],
             [4, 0, 0, 0],
-            [0, 0, 2, 2],
+            [0, 0, 0, 2],
           ],
           bestScore: null,
         };
@@ -447,10 +447,10 @@ describe("board reducer", () => {
         });
 
         expect(result).toEqual({
-          score: 0,
+          score: 4,
           grid: [
             [4, 4, 4, 2],
-            [0, 0, 2, 4],
+            [0, 0, 0, 4],
             [0, 0, 0, 2],
             [0, 0, 0, 0],
           ],
@@ -458,7 +458,7 @@ describe("board reducer", () => {
         });
       });
 
-      fit("updates the score", () => {
+      it("updates the score", () => {
         const mockState = {
           score: 0,
           grid: [
