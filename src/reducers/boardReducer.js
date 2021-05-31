@@ -278,6 +278,10 @@ const boardReducer = (state = initialState, action) => {
         });
       });
 
+      if (emptyCoordinates.length === 0) {
+        return state;
+      }
+
       const randomEmptyCoordinateIndex = Math.floor(
         Math.random() * emptyCoordinates.length
       );

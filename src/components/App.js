@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import Game from "./Game";
 import GlobalStyle from "../GlobalStyle";
-import { selectPoints } from "../reducers/selectors";
+import { selectCurrentGameState, selectPoints } from "../reducers/selectors";
 
 const AboveGame = styled.div`
   display: flex;
@@ -66,6 +66,7 @@ const TitleContainer = styled.div`
 
 const App = () => {
   const score = useSelector(selectPoints);
+  const gameStatus = useSelector(selectCurrentGameState);
 
   return (
     <BodyDiv>
@@ -85,6 +86,7 @@ const App = () => {
             <p>
               Join the numbers and get to the <strong>2048 tile!</strong>
             </p>
+            {gameStatus}
           </AboveGame>
         </TextDiv>
         <StyledGame />
