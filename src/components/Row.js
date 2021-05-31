@@ -10,7 +10,8 @@ const RowContainer = styled.div`
   justify-content: space-between;
 `;
 
-const Row = ({ row }) => {
+const Row = React.memo(({ row }) => {
+  console.log("rendering row...");
   return (
     <RowContainer>
       {row.map((tile, index) => (
@@ -18,6 +19,6 @@ const Row = ({ row }) => {
       ))}
     </RowContainer>
   );
-};
+});
 
 export default Row;

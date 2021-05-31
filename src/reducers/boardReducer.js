@@ -5,6 +5,7 @@ import {
   MOVE_RIGHT,
   MOVE_UP,
 } from "../actions/boardActions";
+import isEqual from "lodash/isEqual";
 
 const newBoard = [
   [0, 0, 0, 0],
@@ -38,8 +39,16 @@ randomCoordinates.forEach((coordinate) => {
   newBoard[i][j] = number;
 });
 
+// const lostBoard = [
+//   [2, 4, 2, 4],
+//   [4, 2, 4, 2],
+//   [2, 4, 2, 4],
+//   [4, 2, 4, 2],
+// ];
+
 const initialState = {
   grid: newBoard,
+  // grid: lostBoard,
   score: 0,
   bestScore: null,
 };
@@ -85,6 +94,14 @@ const tiltGridDown = (grid) => {
     }
     n++;
   }
+
+  nextGrid.forEach((row, i) => {
+    const oldRow = grid[i];
+    if (isEqual(oldRow, row)) {
+      nextGrid[i] = oldRow;
+    }
+  });
+
   return {
     grid: nextGrid,
     points,
@@ -132,6 +149,13 @@ const tiltGridUp = (grid) => {
     }
     n++;
   }
+  nextGrid.forEach((row, i) => {
+    const oldRow = grid[i];
+    if (isEqual(oldRow, row)) {
+      nextGrid[i] = oldRow;
+    }
+  });
+
   return {
     grid: nextGrid,
     points,
@@ -258,6 +282,10 @@ const boardReducer = (state = initialState, action) => {
     case MOVE_UP: {
       const { grid, points } = tiltGridUp(state.grid);
 
+      if (isEqual(state.grid, grid)) {
+        return state;
+      }
+
       return {
         ...state,
         grid: grid,
@@ -266,11 +294,11 @@ const boardReducer = (state = initialState, action) => {
     }
 
     case ADD_TILE: {
-      const nextGrid = [...state.grid];
+      // const nextGrid = [...state.grid];
 
       const emptyCoordinates = [];
 
-      nextGrid.forEach((row, i) => {
+      state.grid.forEach((row, i) => {
         row.forEach((item, j) => {
           if (item === 0) {
             emptyCoordinates.push([i, j]);
@@ -289,9 +317,24 @@ const boardReducer = (state = initialState, action) => {
         emptyCoordinates[randomEmptyCoordinateIndex];
 
       const number = randomNumber();
+      console.log(randomEmptyCoordinate, number);
 
-      const [i, j] = randomEmptyCoordinate;
-      nextGrid[i][j] = number;
+      const nextGrid = state.grid.reduce((acc, row, i) => {
+        if (i === randomEmptyCoordinate[0]) {
+          const newRow = row.reduce((acc, tile, j) => {
+            if (j === randomEmptyCoordinate[1]) {
+              acc.push(number);
+            } else {
+              acc.push(tile);
+            }
+            return acc;
+          }, []);
+          acc.push(newRow);
+        } else {
+          acc.push(row);
+        }
+        return acc;
+      }, []);
 
       return {
         ...state,

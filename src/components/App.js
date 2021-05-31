@@ -64,7 +64,7 @@ const TitleContainer = styled.div`
   display: flex;
 `;
 
-const App = () => {
+const App = React.memo(() => {
   const score = useSelector(selectPoints);
   const gameStatus = useSelector(selectCurrentGameState);
 
@@ -93,6 +93,6 @@ const App = () => {
       </Container>
     </BodyDiv>
   );
-};
+});
 
 export default App;

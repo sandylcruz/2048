@@ -20,10 +20,10 @@ const StyledTile = styled.div`
   }
 `;
 
-const Tile = ({ value }) => {
+const Tile = React.memo(({ value }) => {
   return (
     <StyledTile>{value === 0 ? null : <StyledH1>{value}</StyledH1>}</StyledTile>
   );
-};
+});
 
 export default Tile;
