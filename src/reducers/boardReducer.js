@@ -46,8 +46,16 @@ randomCoordinates.forEach((coordinate) => {
 //   [4, 2, 4, 2],
 // ];
 
+const bugBoard = [
+  [0, 4, 0, 4],
+  [4, 0, 4, 0],
+  [0, 4, 0, 4],
+  [4, 0, 4, 0],
+];
+
 const initialState = {
-  grid: newBoard,
+  grid: bugBoard,
+  // grid: newBoard,
   // grid: lostBoard,
   score: 0,
   bestScore: null,
@@ -73,6 +81,8 @@ const tiltGridDown = (grid) => {
       } else if (nextGrid[j][n] === 0) {
         nextGrid[j][n] = nextGrid[i][n];
         nextGrid[i][n] = 0;
+        i--;
+      } else if (nextGrid[i][n] === 0) {
         i--;
       } else if (nextGrid[i][n] === nextGrid[j][n]) {
         nextGrid[j][n] = nextGrid[i][n] + nextGrid[j][n];

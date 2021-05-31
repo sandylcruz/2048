@@ -497,10 +497,10 @@ describe("board reducer", () => {
         const mockState = {
           score: 0,
           grid: [
-            [2, 0, 0, 0],
-            [0, 2, 0, 0],
-            [0, 0, 0, 2],
-            [0, 0, 2, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [2, 0, 2, 0],
+            [0, 2, 0, 2],
           ],
           bestScore: null,
         };
@@ -600,6 +600,62 @@ describe("board reducer", () => {
             [0, 0, 0, 2],
             [0, 0, 0, 4],
             [4, 4, 4, 2],
+          ],
+          bestScore: null,
+        });
+      });
+
+      it("handles cases where there is a zero between two like numbers", () => {
+        const mockState = {
+          score: 0,
+          grid: [
+            [4, 0, 4, 0],
+            [0, 4, 0, 4],
+            [4, 0, 4, 0],
+            [0, 4, 0, 4],
+          ],
+          bestScore: null,
+        };
+
+        const result = boardReducer(mockState, {
+          type: MOVE_DOWN,
+        });
+
+        expect(result).toEqual({
+          score: 32,
+          grid: [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [8, 8, 8, 8],
+          ],
+          bestScore: null,
+        });
+      });
+
+      fit("handles cases where there are 3 like numbers next to each other", () => {
+        const mockState = {
+          score: 0,
+          grid: [
+            [2, 0, 0, 0],
+            [2, 0, 0, 0],
+            [2, 0, 0, 0],
+            [0, 0, 0, 0],
+          ],
+          bestScore: null,
+        };
+
+        const result = boardReducer(mockState, {
+          type: MOVE_DOWN,
+        });
+
+        expect(result).toEqual({
+          score: 4,
+          grid: [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [2, 0, 0, 0],
+            [4, 0, 0, 0],
           ],
           bestScore: null,
         });

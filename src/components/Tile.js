@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledH1 = styled.div`
-  text-align: center;
-  font-size: 40px;
-  padding: 25px;
-`;
+import { motion } from "framer-motion";
+
+// const StyledH1 = styled(motion.div)`
+//   text-align: center;
+//   font-size: 40px;
+//   padding: 25px;
+// `;
 
 const StyledTile = styled.div`
   border: 5px solid #4a4e69;
@@ -22,7 +24,9 @@ const StyledTile = styled.div`
 
 const Tile = React.memo(({ value }) => {
   return (
-    <StyledTile>{value === 0 ? null : <StyledH1>{value}</StyledH1>}</StyledTile>
+    <StyledTile>
+      {value === 0 ? null : <h1 animate={{ scale: 3 }}>{value}</h1>}
+    </StyledTile>
   );
 });
 
