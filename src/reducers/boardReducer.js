@@ -167,13 +167,24 @@ const tiltGridUp = (grid) => {
       if (nextGrid[i][n].value === 0 && nextGrid[j][n].value === 0) {
         j++;
       } else if (nextGrid[i][n].value === 0) {
-        const oldICoordinate = nextGrid[i][n].value;
-        nextGrid[i][n].value = nextGrid[j][n].value;
-        nextGrid[j][n].value = oldICoordinate;
+        nextGrid[i][n] = {
+          value: nextGrid[i][n].value + nextGrid[j][n].value,
+          id: nextGrid[j][n].id,
+        };
+
+        nextGrid[j][n] = {
+          value: 0,
+          id: null,
+        };
+        j++;
+      } else if (nextGrid[j][n].value === 0) {
         j++;
       } else if (nextGrid[i][n].value === nextGrid[j][n].value) {
-        nextGrid[i][n].value = nextGrid[i][n].value + nextGrid[j][n].value;
-        nextGrid[j][n].value = {
+        nextGrid[i][n] = {
+          value: nextGrid[i][n].value + nextGrid[j][n].value,
+          id: nextGrid[j][n].id,
+        };
+        nextGrid[j][n] = {
           value: 0,
           id: null,
         };
@@ -187,7 +198,7 @@ const tiltGridUp = (grid) => {
       ) {
         i++;
         nextGrid[i][n].value = nextGrid[j][n].value;
-        nextGrid[j][n].value = {
+        nextGrid[j][n] = {
           value: 0,
           id: null,
         };

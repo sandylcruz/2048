@@ -582,30 +582,260 @@ describe("board reducer", () => {
       });
     });
 
-    // describe("when moving right", () => {
-    //   it("moves tiles to the correct right place", () => {
+    describe("when moving up", () => {
+      it("moves tile correctly when it should", () => {
+        const mockGrid = generateGrid([
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 2],
+        ]);
+
+        const result = boardReducer(
+          {
+            grid: mockGrid,
+            score: 0,
+            bestScore: null,
+          },
+          {
+            type: MOVE_UP,
+          }
+        );
+
+        expect(readSimpleGrid(result.grid)).toEqual([
+          [0, 0, 0, 2],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+        ]);
+
+        expect(result.grid[0][3].id).toBe(mockGrid[3][3].id);
+      });
+
+      it("does not move the tile when it should not", () => {
+        const mockGrid = generateGrid([
+          [2, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+        ]);
+
+        const result = boardReducer(
+          {
+            grid: mockGrid,
+            score: 0,
+            bestScore: null,
+          },
+          {
+            type: MOVE_UP,
+          }
+        );
+
+        expect(readSimpleGrid(result.grid)).toEqual([
+          [2, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+        ]);
+
+        expect(result.grid[0][0].id).toBe(mockGrid[0][0].id);
+      });
+
+      it("combines numbers when next to each other", () => {
+        const mockGrid = generateGrid([
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [2, 0, 0, 0],
+          [2, 0, 0, 0],
+        ]);
+
+        const result = boardReducer(
+          {
+            grid: mockGrid,
+            score: 0,
+            bestScore: null,
+          },
+          {
+            type: MOVE_UP,
+          }
+        );
+
+        expect(readSimpleGrid(result.grid)).toEqual([
+          [4, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+        ]);
+
+        expect(result.grid[3][0].id).toBe(mockGrid[3][1].id);
+      });
+
+      it("combines numbers when not next to each other", () => {
+        const mockGrid = generateGrid([
+          [2, 0, 0, 0],
+          [0, 0, 0, 0],
+          [2, 0, 0, 0],
+          [0, 0, 0, 0],
+        ]);
+
+        const result = boardReducer(
+          {
+            grid: mockGrid,
+            score: 0,
+            bestScore: null,
+          },
+          {
+            type: MOVE_UP,
+          }
+        );
+
+        expect(readSimpleGrid(result.grid)).toEqual([
+          [4, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+        ]);
+
+        expect(result.grid[0][0].id).toBe(mockGrid[2][0].id);
+      });
+
+      it("does not combine three numbers", () => {
+        const mockGrid = generateGrid([
+          [2, 0, 0, 0],
+          [2, 0, 0, 0],
+          [2, 0, 0, 0],
+          [0, 0, 0, 0],
+        ]);
+
+        const result = boardReducer(
+          {
+            grid: mockGrid,
+            score: 0,
+            bestScore: null,
+          },
+          {
+            type: MOVE_UP,
+          }
+        );
+
+        expect(readSimpleGrid(result.grid)).toEqual([
+          [4, 0, 0, 0],
+          [2, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+        ]);
+
+        expect(result.grid[0][0].id).toBe(mockGrid[1][0].id);
+        expect(result.grid[1][0].id).toBe(mockGrid[2][0].id);
+      });
+
+      it("combines 2 of 4 like numbers", () => {
+        const mockGrid = generateGrid([
+          [2, 0, 0, 0],
+          [2, 0, 0, 0],
+          [2, 0, 0, 0],
+          [2, 0, 0, 0],
+        ]);
+
+        const result = boardReducer(
+          {
+            grid: mockGrid,
+            score: 0,
+            bestScore: null,
+          },
+          {
+            type: MOVE_UP,
+          }
+        );
+
+        expect(readSimpleGrid(result.grid)).toEqual([
+          [4, 0, 0, 0],
+          [4, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+        ]);
+
+        expect(result.grid[0][0].id).toBe(mockGrid[1][0].id);
+        expect(result.grid[1][0].id).toBe(mockGrid[3][0].id);
+      });
+
+      it("doesn't combine non-like numbers", () => {
+        const mockGrid = generateGrid([
+          [2, 0, 0, 0],
+          [4, 0, 0, 0],
+          [8, 0, 0, 0],
+          [0, 0, 0, 0],
+        ]);
+
+        const result = boardReducer(
+          {
+            grid: mockGrid,
+            score: 0,
+            bestScore: null,
+          },
+          {
+            type: MOVE_UP,
+          }
+        );
+
+        expect(readSimpleGrid(result.grid)).toEqual([
+          [2, 0, 0, 0],
+          [4, 0, 0, 0],
+          [8, 0, 0, 0],
+          [0, 0, 0, 0],
+        ]);
+
+        expect(result.grid[1][0].id).toBe(mockGrid[1][0].id);
+        expect(result.grid[2][0].id).toBe(mockGrid[2][0].id);
+        expect(result.grid[0][0].id).toBe(mockGrid[0][0].id);
+      });
+
+      it("updates the score", () => {
+        const mockGrid = generateGrid([
+          [2, 0, 0, 0],
+          [2, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+        ]);
+
+        const result = boardReducer(
+          {
+            grid: mockGrid,
+            score: 0,
+            bestScore: null,
+          },
+          {
+            type: MOVE_UP,
+          }
+        );
+        expect(result.score).toBe(4);
+      });
+    });
+
+    // describe("when moving up", () => {
+    //   it("moves tiles to the correct place at the top", () => {
     //     const mockState = {
     //       score: 0,
     //       grid: [
-    //         [2, 0, 0, 0],
-    //         [0, 2, 0, 0],
     //         [0, 0, 0, 2],
     //         [0, 0, 2, 0],
+    //         [0, 2, 0, 0],
+    //         [2, 0, 0, 0],
     //       ],
     //       bestScore: null,
     //     };
 
     //     const result = boardReducer(mockState, {
-    //       type: MOVE_RIGHT,
+    //       type: MOVE_UP,
     //     });
 
     //     expect(result).toEqual({
     //       score: 0,
     //       grid: [
-    //         [0, 0, 0, 2],
-    //         [0, 0, 0, 2],
-    //         [0, 0, 0, 2],
-    //         [0, 0, 0, 2],
+    //         [2, 2, 2, 2],
+    //         [0, 0, 0, 0],
+    //         [0, 0, 0, 0],
+    //         [0, 0, 0, 0],
     //       ],
     //       bestScore: null,
     //     });
@@ -615,31 +845,31 @@ describe("board reducer", () => {
     //     const mockState = {
     //       score: 0,
     //       grid: [
-    //         [0, 2, 4, 0],
-    //         [0, 2, 0, 0],
-    //         [4, 0, 0, 2],
+    //         [0, 2, 2, 0],
+    //         [0, 4, 0, 0],
+    //         [2, 0, 0, 2],
     //         [0, 0, 0, 0],
     //       ],
     //       bestScore: null,
     //     };
 
     //     const result = boardReducer(mockState, {
-    //       type: MOVE_RIGHT,
+    //       type: MOVE_UP,
     //     });
 
     //     expect(result).toEqual({
     //       score: 0,
     //       grid: [
-    //         [0, 0, 2, 4],
-    //         [0, 0, 0, 2],
-    //         [0, 0, 4, 2],
+    //         [2, 2, 2, 2],
+    //         [0, 4, 0, 0],
+    //         [0, 0, 0, 0],
     //         [0, 0, 0, 0],
     //       ],
     //       bestScore: null,
     //     });
     //   });
 
-    //   it("handles cases where the non-zero number is far right already", () => {
+    //   it("handles cases where the non-zero number is at the top already", () => {
     //     const mockState = {
     //       score: 0,
     //       grid: [
@@ -652,16 +882,16 @@ describe("board reducer", () => {
     //     };
 
     //     const result = boardReducer(mockState, {
-    //       type: MOVE_RIGHT,
+    //       type: MOVE_UP,
     //     });
 
     //     expect(result).toEqual({
-    //       score: 0,
+    //       score: 8,
     //       grid: [
-    //         [0, 0, 2, 4],
-    //         [0, 0, 0, 2],
-    //         [0, 0, 4, 2],
-    //         [0, 0, 0, 2],
+    //         [4, 4, 4, 4],
+    //         [0, 0, 0, 0],
+    //         [0, 0, 0, 0],
+    //         [0, 0, 0, 0],
     //       ],
     //       bestScore: null,
     //     });
@@ -672,24 +902,24 @@ describe("board reducer", () => {
     //       score: 0,
     //       grid: [
     //         [0, 2, 4, 2],
-    //         [0, 2, 0, 0],
-    //         [4, 0, 0, 2],
-    //         [0, 0, 2, 4],
+    //         [0, 2, 0, 4],
+    //         [4, 0, 0, 0],
+    //         [0, 0, 0, 2],
     //       ],
     //       bestScore: null,
     //     };
 
     //     const result = boardReducer(mockState, {
-    //       type: MOVE_RIGHT,
+    //       type: MOVE_UP,
     //     });
 
     //     expect(result).toEqual({
-    //       score: 0,
+    //       score: 4,
     //       grid: [
-    //         [0, 2, 4, 2],
+    //         [4, 4, 4, 2],
+    //         [0, 0, 0, 4],
     //         [0, 0, 0, 2],
-    //         [0, 0, 4, 2],
-    //         [0, 0, 2, 4],
+    //         [0, 0, 0, 0],
     //       ],
     //       bestScore: null,
     //     });
@@ -702,169 +932,27 @@ describe("board reducer", () => {
     //         [0, 2, 2, 0],
     //         [0, 2, 0, 0],
     //         [0, 0, 0, 2],
-    //         [0, 0, 2, 0],
+    //         [0, 0, 0, 0],
     //       ],
     //       bestScore: null,
     //     };
 
     //     const result = boardReducer(mockState, {
-    //       type: MOVE_RIGHT,
+    //       type: MOVE_UP,
     //     });
 
     //     expect(result).toEqual({
     //       score: 4,
     //       grid: [
-    //         [0, 0, 0, 4],
-    //         [0, 0, 0, 2],
-    //         [0, 0, 0, 2],
-    //         [0, 0, 0, 2],
+    //         [0, 4, 2, 2],
+    //         [0, 0, 0, 0],
+    //         [0, 0, 0, 0],
+    //         [0, 0, 0, 0],
     //       ],
     //       bestScore: null,
     //     });
     //   });
     // });
-
-    describe("when moving up", () => {
-      it("moves tiles to the correct place at the top", () => {
-        const mockState = {
-          score: 0,
-          grid: [
-            [0, 0, 0, 2],
-            [0, 0, 2, 0],
-            [0, 2, 0, 0],
-            [2, 0, 0, 0],
-          ],
-          bestScore: null,
-        };
-
-        const result = boardReducer(mockState, {
-          type: MOVE_UP,
-        });
-
-        expect(result).toEqual({
-          score: 0,
-          grid: [
-            [2, 2, 2, 2],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-          ],
-          bestScore: null,
-        });
-      });
-
-      it("doesn't combine non-like numbers", () => {
-        const mockState = {
-          score: 0,
-          grid: [
-            [0, 2, 2, 0],
-            [0, 4, 0, 0],
-            [2, 0, 0, 2],
-            [0, 0, 0, 0],
-          ],
-          bestScore: null,
-        };
-
-        const result = boardReducer(mockState, {
-          type: MOVE_UP,
-        });
-
-        expect(result).toEqual({
-          score: 0,
-          grid: [
-            [2, 2, 2, 2],
-            [0, 4, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-          ],
-          bestScore: null,
-        });
-      });
-
-      it("handles cases where the non-zero number is at the top already", () => {
-        const mockState = {
-          score: 0,
-          grid: [
-            [0, 2, 4, 0],
-            [0, 2, 0, 0],
-            [4, 0, 0, 2],
-            [0, 0, 0, 2],
-          ],
-          bestScore: null,
-        };
-
-        const result = boardReducer(mockState, {
-          type: MOVE_UP,
-        });
-
-        expect(result).toEqual({
-          score: 8,
-          grid: [
-            [4, 4, 4, 4],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-          ],
-          bestScore: null,
-        });
-      });
-
-      it("doesn't combine 3 non-like numbers", () => {
-        const mockState = {
-          score: 0,
-          grid: [
-            [0, 2, 4, 2],
-            [0, 2, 0, 4],
-            [4, 0, 0, 0],
-            [0, 0, 0, 2],
-          ],
-          bestScore: null,
-        };
-
-        const result = boardReducer(mockState, {
-          type: MOVE_UP,
-        });
-
-        expect(result).toEqual({
-          score: 4,
-          grid: [
-            [4, 4, 4, 2],
-            [0, 0, 0, 4],
-            [0, 0, 0, 2],
-            [0, 0, 0, 0],
-          ],
-          bestScore: null,
-        });
-      });
-
-      it("updates the score", () => {
-        const mockState = {
-          score: 0,
-          grid: [
-            [0, 2, 2, 0],
-            [0, 2, 0, 0],
-            [0, 0, 0, 2],
-            [0, 0, 0, 0],
-          ],
-          bestScore: null,
-        };
-
-        const result = boardReducer(mockState, {
-          type: MOVE_UP,
-        });
-
-        expect(result).toEqual({
-          score: 4,
-          grid: [
-            [0, 4, 2, 2],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-          ],
-          bestScore: null,
-        });
-      });
-    });
 
     describe("when moving down", () => {
       it("moves tiles to the correct place", () => {
