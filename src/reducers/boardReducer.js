@@ -7,13 +7,6 @@ import {
 } from "../actions/boardActions";
 import isEqual from "lodash/isEqual";
 
-// const newBoard = [
-//   [0, 0, 0, 0],
-//   [0, 0, 0, 0],
-//   [0, 0, 0, 0],
-//   [0, 0, 0, 0],
-// ];
-
 const newBoard = [];
 for (let i = 0; i < 4; i++) {
   const row = [];
@@ -46,15 +39,17 @@ const randomCoordinates = [coordinateOne, coordinateTwo];
 const randomNumber = () => {
   return Math.random() < 0.9 ? 2 : 4;
 };
+let id = 1;
 
 randomCoordinates.forEach((coordinate) => {
   const number = randomNumber();
   const [i, j] = coordinate;
-  // newBoard[i][j] = number;
+
   newBoard[i][j] = {
     value: number,
-    id: 1,
+    id: id++,
   };
+  console.log(newBoard[i][j].id);
 });
 
 // const lostBoard = [
@@ -64,15 +59,34 @@ randomCoordinates.forEach((coordinate) => {
 //   [4, 2, 4, 2],
 // ];
 
-// const bugBoard = [
-//   [2, 0, 0, 0],
-//   [0, 0, 0, 0],
-//   [2, 0, 0, 0],
-//   [0, 0, 0, 0],
-// ];
+const generateGrid = (simpleGrid) => {
+  let id = 1;
+  return simpleGrid.map((row) => {
+    return row.map((number) => {
+      if (number === 0) {
+        return {
+          value: 0,
+          id: null,
+        };
+      } else {
+        return {
+          value: number,
+          id: id++,
+        };
+      }
+    });
+  });
+};
+
+const bugBoard = generateGrid([
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 8, 0, 0],
+  [8, 16, 0, 16],
+]);
 
 const initialState = {
-  grid: newBoard,
+  grid: bugBoard,
   score: 0,
   bestScore: null,
 };
@@ -127,8 +141,8 @@ const tiltGridDown = (grid) => {
         j - i !== 1
       ) {
         j--;
-        nextGrid[j][n].value = nextGrid[i][n].value;
-        nextGrid[i][n].value = {
+        nextGrid[j][n] = nextGrid[i][n];
+        nextGrid[i][n] = {
           value: 0,
           id: null,
         };
@@ -208,7 +222,7 @@ const tiltGridUp = (grid) => {
         j - i !== 1
       ) {
         i++;
-        nextGrid[i][n].value = nextGrid[j][n].value;
+        nextGrid[i][n] = nextGrid[j][n];
         nextGrid[j][n] = {
           value: 0,
           id: null,
@@ -397,13 +411,15 @@ const boardReducer = (state = initialState, action) => {
 
       state.grid.forEach((row, i) => {
         row.forEach((item, j) => {
-          if (item === 0) {
+          if (item.value === 0) {
             emptyCoordinates.push([i, j]);
           }
         });
       });
 
       if (emptyCoordinates.length === 0) {
+        console.log("in empty coordinates.length === 0");
+
         return state;
       }
 
@@ -417,12 +433,12 @@ const boardReducer = (state = initialState, action) => {
 
       const tileObject = {
         value: number,
-        layoutId: 1,
+        id: id++,
       };
 
       const emptyTileObject = {
         value: 0,
-        layoutId: null,
+        id: null,
       };
 
       const nextGrid = state.grid.reduce((acc, row, i) => {
@@ -431,7 +447,7 @@ const boardReducer = (state = initialState, action) => {
             if (j === randomEmptyCoordinate[1]) {
               acc.push(tileObject);
             } else {
-              acc.push(emptyTileObject);
+              acc.push(tile);
             }
             return acc;
           }, []);
@@ -441,7 +457,7 @@ const boardReducer = (state = initialState, action) => {
         }
         return acc;
       }, []);
-
+      console.log(nextGrid);
       return {
         ...state,
         grid: nextGrid,

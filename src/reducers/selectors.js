@@ -27,13 +27,13 @@ export const selectCurrentGameState = createSelector(
   (state) => state.board.grid,
   (grid) => {
     const isWon = grid.some((row) => {
-      return row.some((tile) => tile === 2048);
+      return row.some((tile) => tile.value === 2048);
     });
 
     if (isWon) return "won";
 
     const hasEmptyTile = grid.some((row) => {
-      return row.some((tile) => tile === 0);
+      return row.some((tile) => tile.value === 0);
     });
 
     if (hasEmptyTile) return "active";
@@ -44,9 +44,9 @@ export const selectCurrentGameState = createSelector(
 
         return neighborCoordinates.some((coordinate) => {
           const [x, y] = coordinate;
-          const neighborValue = grid[x][y];
+          const neighborValue = grid[x][y].value;
 
-          return neighborValue === tile;
+          return neighborValue === tile.value;
         });
       });
     });
