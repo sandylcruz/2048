@@ -95,15 +95,26 @@ const tiltGridDown = (grid) => {
       if (nextGrid[i][n].value === 0 && nextGrid[j][n].value === 0) {
         i--;
       } else if (nextGrid[j][n].value === 0) {
-        const oldJCoordinate = nextGrid[j][n].value;
-        nextGrid[j][n].value = nextGrid[i][n].value;
-        nextGrid[i][n].value = oldJCoordinate;
+        nextGrid[j][n] = {
+          value: nextGrid[i][n].value + nextGrid[j][n].value,
+          id: nextGrid[i][n].id,
+        };
+
+        nextGrid[i][n] = {
+          value: 0,
+          id: null,
+        };
+
         i--;
       } else if (nextGrid[i][n].value === 0) {
         i--;
       } else if (nextGrid[i][n].value === nextGrid[j][n].value) {
-        nextGrid[j][n].value = nextGrid[i][n].value + nextGrid[j][n].value;
-        nextGrid[i][n].value = {
+        nextGrid[j][n] = {
+          value: nextGrid[i][n].value + nextGrid[j][n].value,
+          id: nextGrid[i][n].id,
+        };
+
+        nextGrid[i][n] = {
           value: 0,
           id: null,
         };
