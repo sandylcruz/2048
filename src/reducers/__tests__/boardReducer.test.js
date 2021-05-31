@@ -322,7 +322,7 @@ describe("board reducer", () => {
     });
 
     describe("when moving right", () => {
-      fit("moves tile correctly when it should", () => {
+      it("moves tile correctly when it should", () => {
         const mockGrid = generateGrid([
           [0, 0, 0, 0],
           [0, 0, 0, 0],
@@ -348,7 +348,7 @@ describe("board reducer", () => {
           [0, 0, 0, 2],
         ]);
 
-        expect(result.grid[3][3].id).toBe(mockGrid[3][1].id);
+        expect(result.grid[3][3].id).toBe(mockGrid[3][0].id);
       });
 
       it("does not move the tile when it should not", () => {
@@ -356,7 +356,7 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [2, 0, 0, 0],
+          [0, 0, 0, 2],
         ]);
 
         const result = boardReducer(
@@ -366,7 +366,7 @@ describe("board reducer", () => {
             bestScore: null,
           },
           {
-            type: MOVE_LEFT,
+            type: MOVE_RIGHT,
           }
         );
 
@@ -374,10 +374,10 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [2, 0, 0, 0],
+          [0, 0, 0, 2],
         ]);
 
-        expect(result.grid[3][0].id).toBe(mockGrid[3][0].id);
+        expect(result.grid[3][3].id).toBe(mockGrid[3][3].id);
       });
 
       it("combines numbers when next to each other", () => {
@@ -385,7 +385,7 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [2, 2, 0, 0],
+          [0, 0, 2, 2],
         ]);
 
         const result = boardReducer(
@@ -395,7 +395,7 @@ describe("board reducer", () => {
             bestScore: null,
           },
           {
-            type: MOVE_LEFT,
+            type: MOVE_RIGHT,
           }
         );
 
@@ -403,10 +403,10 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [4, 0, 0, 0],
+          [0, 0, 0, 4],
         ]);
 
-        expect(result.grid[3][0].id).toBe(mockGrid[3][1].id);
+        expect(result.grid[3][3].id).toBe(mockGrid[3][2].id);
       });
 
       it("combines numbers when not next to each other", () => {
@@ -414,7 +414,7 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [2, 0, 2, 0],
+          [0, 2, 0, 2],
         ]);
 
         const result = boardReducer(
@@ -424,7 +424,7 @@ describe("board reducer", () => {
             bestScore: null,
           },
           {
-            type: MOVE_LEFT,
+            type: MOVE_RIGHT,
           }
         );
 
@@ -432,10 +432,10 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [4, 0, 0, 0],
+          [0, 0, 0, 4],
         ]);
 
-        expect(result.grid[3][0].id).toBe(mockGrid[3][2].id);
+        expect(result.grid[3][3].id).toBe(mockGrid[3][1].id);
       });
 
       it("does not combine three numbers", () => {
@@ -443,7 +443,7 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [2, 2, 2, 0],
+          [0, 2, 2, 2],
         ]);
 
         const result = boardReducer(
@@ -453,7 +453,7 @@ describe("board reducer", () => {
             bestScore: null,
           },
           {
-            type: MOVE_LEFT,
+            type: MOVE_RIGHT,
           }
         );
 
@@ -461,11 +461,11 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [4, 2, 0, 0],
+          [0, 0, 2, 4],
         ]);
 
-        expect(result.grid[3][0].id).toBe(mockGrid[3][1].id);
-        expect(result.grid[3][1].id).toBe(mockGrid[3][2].id);
+        expect(result.grid[3][3].id).toBe(mockGrid[3][2].id);
+        expect(result.grid[3][2].id).toBe(mockGrid[3][1].id);
       });
 
       it("combines 2 of 4 like numbers", () => {
@@ -483,7 +483,7 @@ describe("board reducer", () => {
             bestScore: null,
           },
           {
-            type: MOVE_LEFT,
+            type: MOVE_RIGHT,
           }
         );
 
@@ -491,11 +491,11 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [4, 4, 0, 0],
+          [0, 0, 4, 4],
         ]);
 
-        expect(result.grid[3][0].id).toBe(mockGrid[3][1].id);
-        expect(result.grid[3][1].id).toBe(mockGrid[3][3].id);
+        expect(result.grid[3][3].id).toBe(mockGrid[3][2].id);
+        expect(result.grid[3][2].id).toBe(mockGrid[3][0].id);
       });
 
       it("doesn't combine non-like numbers", () => {
@@ -503,7 +503,7 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [2, 4, 2, 0],
+          [0, 4, 2, 4],
         ]);
 
         const result = boardReducer(
@@ -513,7 +513,7 @@ describe("board reducer", () => {
             bestScore: null,
           },
           {
-            type: MOVE_LEFT,
+            type: MOVE_RIGHT,
           }
         );
 
@@ -521,10 +521,10 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [2, 4, 2, 0],
+          [0, 4, 2, 4],
         ]);
 
-        expect(result.grid[3][0].id).toBe(mockGrid[3][0].id);
+        expect(result.grid[3][3].id).toBe(mockGrid[3][3].id);
         expect(result.grid[3][1].id).toBe(mockGrid[3][1].id);
         expect(result.grid[3][2].id).toBe(mockGrid[3][2].id);
       });
@@ -534,7 +534,7 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [0, 4, 2, 8],
+          [8, 4, 2, 0],
         ]);
 
         const result = boardReducer(
@@ -544,7 +544,7 @@ describe("board reducer", () => {
             bestScore: null,
           },
           {
-            type: MOVE_LEFT,
+            type: MOVE_RIGHT,
           }
         );
 
@@ -552,12 +552,12 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [4, 2, 8, 0],
+          [0, 8, 4, 2],
         ]);
 
-        expect(result.grid[3][0].id).toBe(mockGrid[3][1].id);
-        expect(result.grid[3][1].id).toBe(mockGrid[3][2].id);
-        expect(result.grid[3][2].id).toBe(mockGrid[3][3].id);
+        expect(result.grid[3][3].id).toBe(mockGrid[3][2].id);
+        expect(result.grid[3][2].id).toBe(mockGrid[3][1].id);
+        expect(result.grid[3][1].id).toBe(mockGrid[3][0].id);
       });
 
       it("updates the score", () => {
@@ -575,7 +575,7 @@ describe("board reducer", () => {
             bestScore: null,
           },
           {
-            type: MOVE_LEFT,
+            type: MOVE_RIGHT,
           }
         );
         expect(result.score).toBe(4);

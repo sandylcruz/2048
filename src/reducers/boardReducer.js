@@ -270,24 +270,33 @@ const tiltRowRight = (row) => {
 
   let hasSwapped = false;
   while (i >= 0) {
-    if (nextRow[i] === nextRow[j] && nextRow[i] !== 0) {
-      nextRow[j] = nextRow[i] + nextRow[j];
+    if (nextRow[i].value === nextRow[j].value && nextRow[i].value !== 0) {
+      nextRow[j] = {
+        value: nextRow[i].value + nextRow[j].value,
+        id: nextRow[i].id,
+      };
+
       nextRow[i] = {
         value: 0,
         id: null,
       };
+
       i--;
       hasSwapped = true;
-      points += nextRow[j];
-    } else if (nextRow[i] !== 0 && nextRow[j] !== 0) {
+      points += nextRow[j].value;
+    } else if (nextRow[i].value !== 0 && nextRow[j].value !== 0) {
       j--;
       let temp = nextRow[j];
       nextRow[j] = nextRow[i];
       nextRow[i] = temp;
       i--;
       hasSwapped = true;
-    } else if (nextRow[j] === 0 && nextRow[i] !== 0) {
-      nextRow[j] = nextRow[i];
+    } else if (nextRow[j].value === 0 && nextRow[i].value !== 0) {
+      nextRow[j] = {
+        value: nextRow[i].value,
+        id: nextRow[i].id,
+      };
+
       nextRow[i] = {
         value: 0,
         id: null,
