@@ -22,7 +22,7 @@ const StyledTile = styled.div`
   }
 `;
 
-const Tile = React.memo(({ value }) => {
+const Tile = React.memo(({ value, id }) => {
   return (
     <StyledTile>
       {value === 0 ? null : <h1 animate={{ scale: 3 }}>{value}</h1>}

@@ -11,11 +11,10 @@ const RowContainer = styled.div`
 `;
 
 const Row = React.memo(({ row }) => {
-  console.log("rendering row...");
   return (
     <RowContainer>
       {row.map((tile, index) => (
-        <Tile key={index} value={tile} />
+        <Tile key={index} value={tile.value} id={tile.id} />
       ))}
     </RowContainer>
   );
