@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { batch, useDispatch } from "react-redux";
 import styled from "styled-components";
 
+import { motion, AnimateSharedLayout } from "framer-motion";
+
 import Row from "./Row";
 import {
   addTile,
@@ -11,10 +13,13 @@ import {
   moveRight,
 } from "../actions/boardActions";
 
-const BoardContainer = styled.div`
+const BoardContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-top: 5px solid #4a4e69;
+  border-bottom: 5px solid #4a4e69;
+  border-radius: 7px;
 `;
 
 const Board = React.memo(({ grid }) => {
@@ -64,11 +69,13 @@ const Board = React.memo(({ grid }) => {
   }, [dispatch]);
 
   return (
-    <BoardContainer>
-      {grid.map((row, index) => (
-        <Row key={index} row={row} />
-      ))}
-    </BoardContainer>
+    <AnimateSharedLayout>
+      <BoardContainer layout>
+        {grid.map((row, index) => (
+          <Row key={index} row={row} />
+        ))}
+      </BoardContainer>
+    </AnimateSharedLayout>
   );
 });
 

@@ -7,6 +7,7 @@ import {
 } from "../actions/boardActions";
 import isEqual from "lodash/isEqual";
 
+let id = 1;
 const newBoard = [];
 for (let i = 0; i < 4; i++) {
   const row = [];
@@ -39,7 +40,6 @@ const randomCoordinates = [coordinateOne, coordinateTwo];
 const randomNumber = () => {
   return Math.random() < 0.9 ? 2 : 4;
 };
-let id = 1;
 
 randomCoordinates.forEach((coordinate) => {
   const number = randomNumber();
@@ -49,7 +49,6 @@ randomCoordinates.forEach((coordinate) => {
     value: number,
     id: id++,
   };
-  console.log(newBoard[i][j].id);
 });
 
 // const lostBoard = [
@@ -192,10 +191,7 @@ const tiltGridUp = (grid) => {
       if (nextGrid[i][n].value === 0 && nextGrid[j][n].value === 0) {
         j++;
       } else if (nextGrid[i][n].value === 0) {
-        nextGrid[i][n] = {
-          value: nextGrid[i][n].value + nextGrid[j][n].value,
-          id: nextGrid[j][n].id,
-        };
+        nextGrid[i][n] = nextGrid[j][n];
 
         nextGrid[j][n] = {
           value: 0,
@@ -328,10 +324,7 @@ const tiltRowRight = (row) => {
       i--;
       hasSwapped = true;
     } else if (nextRow[j].value === 0 && nextRow[i].value !== 0) {
-      nextRow[j] = {
-        value: nextRow[i].value,
-        id: nextRow[i].id,
-      };
+      nextRow[j] = nextRow[i];
 
       nextRow[i] = {
         value: 0,
@@ -418,8 +411,6 @@ const boardReducer = (state = initialState, action) => {
       });
 
       if (emptyCoordinates.length === 0) {
-        console.log("in empty coordinates.length === 0");
-
         return state;
       }
 
@@ -434,11 +425,6 @@ const boardReducer = (state = initialState, action) => {
       const tileObject = {
         value: number,
         id: id++,
-      };
-
-      const emptyTileObject = {
-        value: 0,
-        id: null,
       };
 
       const nextGrid = state.grid.reduce((acc, row, i) => {
@@ -457,7 +443,6 @@ const boardReducer = (state = initialState, action) => {
         }
         return acc;
       }, []);
-      console.log(nextGrid);
       return {
         ...state,
         grid: nextGrid,
