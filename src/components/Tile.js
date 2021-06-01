@@ -13,6 +13,7 @@ const StyledTile = styled.div`
   width: 100px;
   height: 100px;
   text-align: center;
+  animation: add 0.8s ease-in-out;
   &:nth-child(1) {
     border-left: 10px solid #4a4e69;
   }
@@ -42,17 +43,9 @@ const Tile = React.memo(({ value, id }) => {
     //   <div>{value === 0 ? null : <StyledH1>{value}</StyledH1>}</div>
     // </StyledTile>
     <StyledTile>
-      {value === 0 ? null : (
-        <StyledContent layoutId={id}>{value}</StyledContent>
-      )}
+      <StyledContent layout>{value === 0 ? null : value}</StyledContent>
     </StyledTile>
   );
 });
-
-const spring = {
-  type: "spring",
-  stiffness: 500,
-  damping: 30,
-};
 
 export default Tile;

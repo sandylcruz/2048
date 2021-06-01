@@ -8,11 +8,37 @@ import {
 
 describe("board reducer", () => {
   it("has the correct initial state", () => {
+    const startingGrid = [
+      [
+        { value: 0, id: 1 },
+        { value: 0, id: 2 },
+        { value: 0, id: 3 },
+        { value: 0, id: 4 },
+      ],
+      [
+        { value: 0, id: 5 },
+        { value: 0, id: 6 },
+        { value: 0, id: 7 },
+        { value: 0, id: 8 },
+      ],
+      [
+        { value: 0, id: 9 },
+        { value: 0, id: 10 },
+        { value: 0, id: 11 },
+        { value: 0, id: 12 },
+      ],
+      [
+        { value: 0, id: 13 },
+        { value: 0, id: 14 },
+        { value: 0, id: 15 },
+        { value: 0, id: 16 },
+      ],
+    ];
     const state = boardReducer(undefined, { type: "mockAction " });
     expect(state).toEqual({
       score: 0,
       bestScore: null,
-      grid: expect.any(Array),
+      grid: expect.anything(),
     });
 
     const numbers = state.grid.reduce((accumulator, row) => {
@@ -42,17 +68,10 @@ describe("board reducer", () => {
       let id = 1;
       return simpleGrid.map((row) => {
         return row.map((number) => {
-          if (number === 0) {
-            return {
-              value: 0,
-              id: null,
-            };
-          } else {
-            return {
-              value: number,
-              id: id++,
-            };
-          }
+          return {
+            value: number,
+            id: id++,
+          };
         });
       });
     };
@@ -667,7 +686,7 @@ describe("board reducer", () => {
           [0, 0, 0, 0],
         ]);
 
-        expect(result.grid[3][0].id).toBe(mockGrid[3][1].id);
+        expect(result.grid[0][0].id).toBe(mockGrid[3][0].id);
       });
 
       it("combines numbers when not next to each other", () => {

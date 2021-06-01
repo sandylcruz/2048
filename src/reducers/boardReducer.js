@@ -14,7 +14,7 @@ for (let i = 0; i < 4; i++) {
   for (let j = 0; j < 4; j++) {
     const tile = {
       value: 0,
-      id: null,
+      id: id++,
     };
 
     row.push(tile);
@@ -44,19 +44,13 @@ const randomNumber = () => {
 randomCoordinates.forEach((coordinate) => {
   const number = randomNumber();
   const [i, j] = coordinate;
+  const oldTile = newBoard[i][j];
 
   newBoard[i][j] = {
     value: number,
-    id: id++,
+    id: oldTile.id,
   };
 });
-
-// const lostBoard = [
-//   [2, 4, 2, 4],
-//   [4, 2, 4, 2],
-//   [2, 4, 2, 4],
-//   [4, 2, 4, 2],
-// ];
 
 const generateGrid = (simpleGrid) => {
   let id = 1;
@@ -77,15 +71,15 @@ const generateGrid = (simpleGrid) => {
   });
 };
 
-const bugBoard = generateGrid([
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 8, 0, 0],
-  [8, 16, 0, 16],
-]);
+// const bugBoard = generateGrid([
+//   [0, 0, 0, 0],
+//   [0, 0, 0, 0],
+//   [0, 8, 0, 0],
+//   [8, 16, 0, 16],
+// ]);
 
 const initialState = {
-  grid: bugBoard,
+  grid: newBoard,
   score: 0,
   bestScore: null,
 };
@@ -108,6 +102,8 @@ const tiltGridDown = (grid) => {
       if (nextGrid[i][n].value === 0 && nextGrid[j][n].value === 0) {
         i--;
       } else if (nextGrid[j][n].value === 0) {
+        const oldTile = nextGrid[j][n];
+
         nextGrid[j][n] = {
           value: nextGrid[i][n].value + nextGrid[j][n].value,
           id: nextGrid[i][n].id,
@@ -115,13 +111,14 @@ const tiltGridDown = (grid) => {
 
         nextGrid[i][n] = {
           value: 0,
-          id: null,
+          id: oldTile.id,
         };
 
         i--;
       } else if (nextGrid[i][n].value === 0) {
         i--;
       } else if (nextGrid[i][n].value === nextGrid[j][n].value) {
+        const oldTile = nextGrid[j][n];
         nextGrid[j][n] = {
           value: nextGrid[i][n].value + nextGrid[j][n].value,
           id: nextGrid[i][n].id,
@@ -129,7 +126,7 @@ const tiltGridDown = (grid) => {
 
         nextGrid[i][n] = {
           value: 0,
-          id: null,
+          id: oldTile.id,
         };
         points += nextGrid[j][n].value;
         i--;
@@ -140,10 +137,12 @@ const tiltGridDown = (grid) => {
         j - i !== 1
       ) {
         j--;
+        const oldTile = nextGrid[j][n];
+
         nextGrid[j][n] = nextGrid[i][n];
         nextGrid[i][n] = {
           value: 0,
-          id: null,
+          id: oldTile.id,
         };
         i--;
       } else if (
@@ -191,23 +190,26 @@ const tiltGridUp = (grid) => {
       if (nextGrid[i][n].value === 0 && nextGrid[j][n].value === 0) {
         j++;
       } else if (nextGrid[i][n].value === 0) {
+        const oldTile = nextGrid[i][n];
         nextGrid[i][n] = nextGrid[j][n];
 
         nextGrid[j][n] = {
           value: 0,
-          id: null,
+          id: oldTile.id,
         };
         j++;
       } else if (nextGrid[j][n].value === 0) {
         j++;
       } else if (nextGrid[i][n].value === nextGrid[j][n].value) {
+        const oldTile = nextGrid[i][n];
+
         nextGrid[i][n] = {
           value: nextGrid[i][n].value + nextGrid[j][n].value,
           id: nextGrid[j][n].id,
         };
         nextGrid[j][n] = {
           value: 0,
-          id: null,
+          id: oldTile.id,
         };
         points += nextGrid[i][n].value;
         i++;
@@ -218,10 +220,11 @@ const tiltGridUp = (grid) => {
         j - i !== 1
       ) {
         i++;
+        const oldTile = nextGrid[i][n];
         nextGrid[i][n] = nextGrid[j][n];
         nextGrid[j][n] = {
           value: 0,
-          id: null,
+          id: oldTile.id,
         };
         j++;
       } else if (
@@ -259,14 +262,16 @@ const tiltRowLeft = (row) => {
   let hasSwapped = false;
   while (j < nextRow.length) {
     if (nextRow[i].value === nextRow[j].value && nextRow[i].value !== 0) {
+      const oldTile = nextRow[i];
       nextRow[i] = {
         value: nextRow[i].value + nextRow[j].value,
         id: nextRow[j].id,
       };
       nextRow[j] = {
         value: 0,
-        id: null,
+        id: oldTile.id,
       };
+      i++;
       j++;
       hasSwapped = true;
       points += nextRow[i].value;
@@ -303,6 +308,7 @@ const tiltRowRight = (row) => {
   let hasSwapped = false;
   while (i >= 0) {
     if (nextRow[i].value === nextRow[j].value && nextRow[i].value !== 0) {
+      const oldTile = nextRow[j];
       nextRow[j] = {
         value: nextRow[i].value + nextRow[j].value,
         id: nextRow[i].id,
@@ -310,9 +316,10 @@ const tiltRowRight = (row) => {
 
       nextRow[i] = {
         value: 0,
-        id: null,
+        id: oldTile.id,
       };
 
+      j--;
       i--;
       hasSwapped = true;
       points += nextRow[j].value;
@@ -324,11 +331,12 @@ const tiltRowRight = (row) => {
       i--;
       hasSwapped = true;
     } else if (nextRow[j].value === 0 && nextRow[i].value !== 0) {
+      const oldTile = nextRow[j];
       nextRow[j] = nextRow[i];
 
       nextRow[i] = {
         value: 0,
-        id: null,
+        id: oldTile.id,
       };
       i--;
       hasSwapped = true;
@@ -424,7 +432,7 @@ const boardReducer = (state = initialState, action) => {
 
       const tileObject = {
         value: number,
-        id: id++,
+        id: randomEmptyCoordinate.id,
       };
 
       const nextGrid = state.grid.reduce((acc, row, i) => {
