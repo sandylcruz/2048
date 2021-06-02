@@ -13,7 +13,7 @@ import {
   moveRight,
 } from "../actions/boardActions";
 
-const BoardContainer = styled(motion.div)`
+const BoardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -70,7 +70,7 @@ const Board = React.memo(({ grid }) => {
 
   return (
     <AnimateSharedLayout>
-      <BoardContainer layout>
+      <BoardContainer>
         {grid.map((row, index) => (
           <Row key={index} row={row} />
         ))}

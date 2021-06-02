@@ -271,10 +271,11 @@ const tiltRowLeft = (row) => {
         value: 0,
         id: oldTile.id,
       };
+      points += nextRow[i].value;
+
       i++;
       j++;
       hasSwapped = true;
-      points += nextRow[i].value;
     } else if (nextRow[i].value !== 0 && nextRow[j].value !== 0) {
       i++;
       let temp = nextRow[j];
@@ -318,11 +319,11 @@ const tiltRowRight = (row) => {
         value: 0,
         id: oldTile.id,
       };
+      points += nextRow[j].value;
 
       j--;
       i--;
       hasSwapped = true;
-      points += nextRow[j].value;
     } else if (nextRow[i].value !== 0 && nextRow[j].value !== 0) {
       j--;
       let temp = nextRow[j];
@@ -430,9 +431,12 @@ const boardReducer = (state = initialState, action) => {
 
       const number = randomNumber();
 
+      const [i, j] = randomEmptyCoordinate;
+      const previousTile = state.grid[i][j];
+
       const tileObject = {
         value: number,
-        id: randomEmptyCoordinate.id,
+        id: previousTile.id,
       };
 
       const nextGrid = state.grid.reduce((acc, row, i) => {

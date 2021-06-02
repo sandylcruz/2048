@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 import Game from "./Game";
 import GlobalStyle from "../GlobalStyle";
+import { lightTheme, darkTheme } from "./Themes";
 import { selectCurrentGameState, selectPoints } from "../reducers/selectors";
 
 const AboveGame = styled.div`
@@ -67,31 +68,39 @@ const TitleContainer = styled.div`
 const App = React.memo(() => {
   const score = useSelector(selectPoints);
   const gameStatus = useSelector(selectCurrentGameState);
+  const [theme, setTheme] = useState("light");
+
+  const themeToggler = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
 
   return (
-    <BodyDiv>
-      <Container>
-        <GlobalStyle />
-        <TextDiv>
-          <HeaderDiv>
-            <TitleContainer>
-              <StyledH1>2048</StyledH1>
-            </TitleContainer>
-            <ScoreContainer>
-              <StyledH3>SCORE</StyledH3>
-              <StyledH4>{score}</StyledH4>
-            </ScoreContainer>
-          </HeaderDiv>
-          <AboveGame>
-            <p>
-              Join the numbers and get to the <strong>2048 tile!</strong>
-            </p>
-            {gameStatus}
-          </AboveGame>
-        </TextDiv>
-        <StyledGame />
-      </Container>
-    </BodyDiv>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <BodyDiv>
+        <Container>
+          <GlobalStyle />
+          <TextDiv>
+            <HeaderDiv>
+              <TitleContainer>
+                <StyledH1>2048</StyledH1>
+              </TitleContainer>
+              <ScoreContainer>
+                <StyledH3>SCORE</StyledH3>
+                <StyledH4>{score}</StyledH4>
+              </ScoreContainer>
+            </HeaderDiv>
+            <AboveGame>
+              <button onClick={themeToggler}>Switch Theme</button>
+              <p>
+                Join the numbers and get to the <strong>2048 tile!</strong>
+              </p>
+              {gameStatus}
+            </AboveGame>
+          </TextDiv>
+          <StyledGame />
+        </Container>
+      </BodyDiv>
+    </ThemeProvider>
   );
 });
 
