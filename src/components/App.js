@@ -6,6 +6,7 @@ import Game from "./Game";
 import GlobalStyle from "../GlobalStyle";
 import { lightTheme, darkTheme } from "./Themes";
 import { selectCurrentGameState, selectPoints } from "../reducers/selectors";
+import Toggle from "./Toggle";
 
 const AboveGame = styled.div`
   display: flex;
@@ -90,7 +91,7 @@ const App = React.memo(() => {
               </ScoreContainer>
             </HeaderDiv>
             <AboveGame>
-              <button onClick={themeToggler}>Switch Theme</button>
+              <Toggle onClick={themeToggler}>Switch Theme</Toggle>
               <p>
                 Join the numbers and get to the <strong>2048 tile!</strong>
               </p>
