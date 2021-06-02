@@ -45,11 +45,11 @@ const CheckBox = styled.input`
   }
 `;
 
-const Toggle = () => {
+const Toggle = ({ onChange }) => {
   return (
     <div>
       <CheckBoxWrapper>
-        <CheckBox id="checkbox" type="checkbox" />
+        <CheckBox id="checkbox" type="checkbox" onChange={onChange} />
         <CheckBoxLabel htmlFor="checkbox" />
       </CheckBoxWrapper>
     </div>

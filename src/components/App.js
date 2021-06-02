@@ -10,8 +10,11 @@ import Toggle from "./Toggle";
 
 const AboveGame = styled.div`
   display: flex;
-  margin-bottom: 10px;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: -50px;
 `;
+
 const BodyDiv = styled.div`
   height: 100%;
   display: flex;
@@ -25,7 +28,7 @@ const HeaderDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 15px;
+  align-items: center;
 `;
 
 const ScoreContainer = styled.div`
@@ -38,6 +41,7 @@ const ScoreContainer = styled.div`
   float: right;
   padding: 5px;
   border-radius: 3px;
+  height: 80px;
 `;
 
 const StyledGame = styled(Game)`
@@ -47,12 +51,13 @@ const StyledGame = styled(Game)`
 const StyledH1 = styled.h1`
   font-family: Helvetica;
   text-align: center;
-  font-size: 75px;
+  font-size: 105px;
 `;
 
 const StyledH3 = styled.h3`
   font-size: 20px;
   margin: 0;
+  padding: 0;
 `;
 
 const StyledH4 = styled.h4`
@@ -64,6 +69,12 @@ const TextDiv = styled.div``;
 
 const TitleContainer = styled.div`
   display: flex;
+`;
+
+const ToggleDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const App = React.memo(() => {
@@ -91,11 +102,13 @@ const App = React.memo(() => {
               </ScoreContainer>
             </HeaderDiv>
             <AboveGame>
-              <Toggle onClick={themeToggler}>Switch Theme</Toggle>
               <p>
                 Join the numbers and get to the <strong>2048 tile!</strong>
               </p>
-              {gameStatus}
+              {/* {gameStatus} */}
+              <ToggleDiv>
+                <Toggle onChange={themeToggler}>Switch Theme</Toggle>
+              </ToggleDiv>
             </AboveGame>
           </TextDiv>
           <StyledGame />
