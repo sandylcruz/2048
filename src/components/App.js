@@ -29,6 +29,7 @@ const HeaderDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  width: 400px;
 `;
 
 const ScoreContainer = styled.div`
