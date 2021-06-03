@@ -32,7 +32,7 @@ import { motion } from "framer-motion";
 //   }
 //  }`;
 
-const StyledContent = styled(motion.div)`
+const StyledContent = styled.div`
   font-size: 40px;
   margin-top: 25px;
   opacity: 1 !important;
@@ -85,7 +85,7 @@ const StyledContent = styled(motion.div)`
 // }
 // `;
 
-const StyledTile = styled.div`
+const StyledTile = styled(motion.div)`
   border: 5px solid #4a4e69;
   display: block;
 
@@ -97,14 +97,18 @@ const StyledTile = styled.div`
   width: 100px;
   height: 100px;
   text-align: center;
+  position: absolute;
+  top: ${({ top }) => `${top}px`};
+  left: ${({ left }) => `${left}px`};
+  // top: ${({ position }) => `${Math.floor(position / 4) * 100}px`};
 
-  &:nth-child(1) {
-    border-left: 10px solid #4a4e69;
-  }
+  // &:nth-child(1) {
+  //   border-left: 10px solid #4a4e69;
+  // }
 
-  &:nth-child(4) {
-    border-right: 10px solid #4a4e69;
-  }
+  // &:nth-child(4) {
+  //   border-right: 10px solid #4a4e69;
+  // }
 `;
 // const StyledTile = styled(motion.div)`
 //   border: 5px solid #4a4e69;
@@ -133,23 +137,38 @@ const variants = {
   },
 };
 
-const Tile = React.memo(({ value, id }) => {
+const Tile = React.memo(({ id, value, position }) => {
+  const top = Math.floor(position / 4) * 100;
+  const left = Math.floor(position % 4) * 100;
+
+  console.log("***", position, top, left);
+
   return (
     // <StyledTile layoutId={id} animate={{ x: 100 }} transition={{ delay: 1 }}>
     //   <div>{value === 0 ? null : <StyledH1>{value}</StyledH1>}</div>
     // </StyledTile>
 
-    <StyledTile value={value}>
+    <StyledTile
+      value={value}
+      layoutId={`tile-${id}`}
+      initial={{ visibility: "visible", opacity: 1 }}
+      top={top}
+      left={left}
+      // animate={{
+      //   x: Math.floor(position % 4) * 10,
+      //   y: Math.floor(position / 4) * 10,
+      // }}
+    >
       {value !== 0 && (
         <StyledContent
-          layout
-          animate={{ rotate: 360, visibility: "visible", opacity: 1 }}
-          // animate={value === 0 ? "zero" : "nonZero"}
-          transition={{ ease: "easeOut", duration: 1 }}
-          initial={{ visibility: "visible", opacity: 1 }}
-          variants={variants}
-          value={value}
-          layoutId={`tile-${id}`}
+        // layout
+        // animate={{ rotate: 360, visibility: "visible", opacity: 1 }}
+        // // animate={value === 0 ? "zero" : "nonZero"}
+        // transition={{ ease: "easeOut", duration: 1 }}
+        // initial={{ visibility: "visible", opacity: 1 }}
+        // variants={variants}
+        // value={value}
+        // layoutId={`tile-${id}`}
         >
           {value === 0 ? null : value}
         </StyledContent>
