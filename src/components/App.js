@@ -112,6 +112,8 @@ const App = React.memo(() => {
             </AboveGame>
           </TextDiv>
           <StyledGame />
+
+          <button type="submit">New game</button>
         </Container>
       </BodyDiv>
     </ThemeProvider>

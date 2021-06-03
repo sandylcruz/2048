@@ -24,6 +24,13 @@ const CheckBoxLabel = styled.label`
     box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.2);
     transition: 0.2s;
   }
+
+  &:hover {
+    background-color: red;
+    transition: border-color 0.25s ease-in-out 0s,
+      box-shadow 0.1s ease-in-out 0s, background-color 0.25s ease-in-out 0s,
+      color 0.25s ease-in-out 0s;
+  }
 `;
 const CheckBox = styled.input`
   opacity: 0;
