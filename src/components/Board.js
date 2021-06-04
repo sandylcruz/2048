@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import { batch, useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import { motion, AnimateSharedLayout } from "framer-motion";
+import { AnimateSharedLayout } from "framer-motion";
 
-import Row from "./Row";
 import Tile from "./Tile";
 import {
   addTile,
@@ -15,15 +14,6 @@ import {
 } from "../actions/boardActions";
 
 const BoardContainer = styled.div`
-  // display: flex;
-  // flex-direction: row;
-  // flex-wrap: wrap;
-  // max-width: 440px;
-  // align-items: center;
-  // width: 100%;
-  // border-top: 5px solid #4a4e69;
-  // border-bottom: 5px solid #4a4e69;
-  // border-radius: 7px;
   position: absolute;
 `;
 
@@ -82,12 +72,12 @@ const Board = React.memo(({ grid }) => {
             key={tile.id}
             position={tile.position}
             value={tile.value}
+            grid={grid}
           />
         ))}
       </BoardContainer>
     </AnimateSharedLayout>
   );
 });
-// <Row key={index} row={row} />
 
 export default Board;

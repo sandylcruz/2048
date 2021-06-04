@@ -51,26 +51,6 @@ randomCoordinates.forEach((coordinate) => {
     id: oldTile.id,
   };
 });
-
-const generateGrid = (simpleGrid) => {
-  let id = 1;
-  return simpleGrid.map((row) => {
-    return row.map((number) => {
-      if (number === 0) {
-        return {
-          value: 0,
-          id: null,
-        };
-      } else {
-        return {
-          value: number,
-          id: id++,
-        };
-      }
-    });
-  });
-};
-
 // const bugBoard = generateGrid([
 //   [0, 0, 0, 0],
 //   [0, 0, 0, 0],

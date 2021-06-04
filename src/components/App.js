@@ -32,6 +32,10 @@ const HeaderDiv = styled.div`
   width: 400px;
 `;
 
+const RestartButton = styled.button`
+  margin-top: 400px;
+`;
+
 const ScoreContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,7 +54,7 @@ const StyledGame = styled(Game)`
 `;
 
 const StyledH1 = styled.h1`
-  font-family: Helvetica;
+  font-family: helvetica;
   text-align: center;
   font-size: 105px;
 `;
@@ -78,6 +82,12 @@ const ToggleDiv = styled.div`
   justify-content: center;
 `;
 
+const UnderGame = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const App = React.memo(() => {
   const score = useSelector(selectPoints);
   const gameStatus = useSelector(selectCurrentGameState);
@@ -86,6 +96,8 @@ const App = React.memo(() => {
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
+
+  const restartGame = () => {};
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -106,15 +118,17 @@ const App = React.memo(() => {
               <p>
                 Join the numbers and get to the <strong>2048 tile!</strong>
               </p>
-              {/* {gameStatus} */}
+
               <ToggleDiv>
                 <Toggle onChange={themeToggler}>Switch Theme</Toggle>
               </ToggleDiv>
             </AboveGame>
+            {/* <h3>{gameStatus}</h3> */}
           </TextDiv>
-          <StyledGame />
-
-          <button type="submit">New game</button>
+          <StyledGame restartGame={restartGame} />
+          <UnderGame>
+            <RestartButton type="submit">Restart game</RestartButton>
+          </UnderGame>
         </Container>
       </BodyDiv>
     </ThemeProvider>
