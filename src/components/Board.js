@@ -17,6 +17,13 @@ const BoardContainer = styled.div`
   position: absolute;
 `;
 
+const Div = styled.div`
+  height: 410px;
+  width: 410px;
+  // background-color: red;
+  box-shadow: 0px 0px 10px 2px grey;
+`;
+
 const Board = React.memo(({ grid }) => {
   const dispatch = useDispatch();
 
@@ -65,17 +72,19 @@ const Board = React.memo(({ grid }) => {
 
   return (
     <AnimateSharedLayout>
-      <BoardContainer>
-        {grid.map((tile) => (
-          <Tile
-            id={tile.id}
-            key={tile.id}
-            position={tile.position}
-            value={tile.value}
-            grid={grid}
-          />
-        ))}
-      </BoardContainer>
+      <Div>
+        <BoardContainer>
+          {grid.map((tile) => (
+            <Tile
+              id={tile.id}
+              key={tile.id}
+              position={tile.position}
+              value={tile.value}
+              grid={grid}
+            />
+          ))}
+        </BoardContainer>
+      </Div>
     </AnimateSharedLayout>
   );
 });

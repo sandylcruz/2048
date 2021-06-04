@@ -17,7 +17,7 @@ const Game = React.memo(({ restartGame }) => {
           {gameState === "won" ? "You won!" : "You lost!"}
         </Modal>
       )}
-      <Board grid={grid} />;
+      <Board grid={grid} />
     </div>
   );
 });

@@ -15,6 +15,7 @@ const AboveGame = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin-top: -50px;
+  max-width: 400px;
 `;
 
 const ArrowDiv = styled.div`
@@ -45,7 +46,6 @@ const HeaderDiv = styled.div`
 `;
 
 const RestartButton = styled.button`
-  margin-top: 400px;
   background-color: rgb(204, 51, 64);
   text-decoration: none;
   border: 1px solid transparent;
@@ -89,6 +89,7 @@ const ScoreContainer = styled.div`
 
 const StyledGame = styled(Game)`
   background-color: red;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
 `;
 
 const StyledH1 = styled.h1`
@@ -121,9 +122,11 @@ const ToggleDiv = styled.div`
 `;
 
 const UnderGame = styled.div`
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 400px;
 `;
 
 const App = React.memo(() => {
@@ -171,6 +174,7 @@ const App = React.memo(() => {
               Restart game
             </RestartButton>
           </UnderGame>
+
           {/* <ArrowDiv>
             <ArrowSpan>&uarr;</ArrowSpan>
             <ArrowSpan>&darr;</ArrowSpan>

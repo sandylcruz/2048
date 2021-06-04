@@ -6,7 +6,6 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.text};
     transition: all 0.20s linear;
     font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
-
   }
 `;
 
