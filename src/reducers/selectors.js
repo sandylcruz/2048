@@ -34,30 +34,17 @@ const getNeighborCoordinates = ([i, j], maxSize) => {
 export const selectCurrentGameState = createSelector(
   (state) => state.board.grid,
   (grid) => {
-    const isWon = () => {
-      return grid.some((tile) => tile.value === 2048);
-    };
+    const isWon = grid.some((row) => {
+      return row.some((tile) => tile.value === 2048);
+    });
 
     if (isWon) return "won";
 
-    const hasEmptyTile = () => {
-      return grid.some((tile) => tile.value === 0);
-    };
+    const hasEmptyTile = grid.some((row) => {
+      return row.some((tile) => tile.value === 0);
+    });
 
     if (hasEmptyTile) return "active";
-    // const isWon = grid.some((tile) => tile.value === 2048);
-
-    // const isWon = grid.some((row) => {
-    //   return row.some((tile) => tile.value === 2048);
-    // });
-
-    // const hasEmptyTile = grid.some((row) => {
-    //   return row.some((tile) => tile.value === 0);
-    // });
-
-    //  const hasEmptyTile = grid.some((row) => {
-    //    return row.some((tile) => tile.value === 0);
-    //  });
 
     const hasMovesLeft = grid.some((row, i) => {
       return row.some((tile, j) => {
