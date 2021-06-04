@@ -5,8 +5,9 @@ import styled, { ThemeProvider } from "styled-components";
 import Game from "./Game";
 import GlobalStyle from "../GlobalStyle";
 import { lightTheme, darkTheme } from "./Themes";
+import { moveUp } from "../actions/boardActions";
 import { restartGame as restartGameAction } from "../actions/boardActions";
-import { selectCurrentGameState, selectPoints } from "../reducers/selectors";
+import { selectPoints } from "../reducers/selectors";
 import Toggle from "./Toggle";
 
 const AboveGame = styled.div`
@@ -14,6 +15,16 @@ const AboveGame = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin-top: -50px;
+`;
+
+const ArrowDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const ArrowSpan = styled.div`
+  font-size: 40px;
 `;
 
 const BodyDiv = styled.div`
@@ -153,7 +164,6 @@ const App = React.memo(() => {
                 <Toggle onChange={themeToggler}>Switch Theme</Toggle>
               </ToggleDiv>
             </AboveGame>
-            {/* <h3>{gameStatus}</h3> */}
           </TextDiv>
           <StyledGame restartGame={restartGame} />
           <UnderGame>
@@ -161,6 +171,12 @@ const App = React.memo(() => {
               Restart game
             </RestartButton>
           </UnderGame>
+          {/* <ArrowDiv>
+            <ArrowSpan>&uarr;</ArrowSpan>
+            <ArrowSpan>&darr;</ArrowSpan>
+            <ArrowSpan>&rarr;</ArrowSpan>
+            <ArrowSpan>&darr;</ArrowSpan>
+          </ArrowDiv> */}
         </Container>
       </BodyDiv>
     </ThemeProvider>

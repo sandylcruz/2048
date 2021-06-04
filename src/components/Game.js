@@ -8,7 +8,6 @@ import { selectCurrentGameState, selectGrid } from "../reducers/selectors";
 const Game = React.memo(({ restartGame }) => {
   const grid = useSelector(selectGrid);
   const gameState = useSelector(selectCurrentGameState);
-  console.log(gameState);
   const shouldShowModal = gameState === "won" || gameState === "lost";
 
   return (
