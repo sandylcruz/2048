@@ -4,53 +4,59 @@ import {
   MOVE_LEFT,
   MOVE_RIGHT,
   MOVE_UP,
+  RESTART_GAME,
 } from "../actions/boardActions";
 import isEqual from "lodash/isEqual";
 
 let id = 1;
-const newBoard = [];
-for (let i = 0; i < 4; i++) {
-  const row = [];
-  for (let j = 0; j < 4; j++) {
-    const tile = {
-      value: 0,
-      id: id++,
-    };
 
-    row.push(tile);
-  }
-  newBoard.push(row);
-}
-
-const generateRandomCoordinate = () => {
-  return [Math.floor(Math.random() * 4), Math.floor(Math.random() * 4)];
-};
-
-const coordinateOne = generateRandomCoordinate();
-let coordinateTwo = generateRandomCoordinate();
-
-while (
-  coordinateTwo[0] === coordinateOne[0] &&
-  coordinateTwo[1] === coordinateOne[1]
-) {
-  coordinateTwo = generateRandomCoordinate();
-}
-
-const randomCoordinates = [coordinateOne, coordinateTwo];
 const randomNumber = () => {
   return Math.random() < 0.9 ? 2 : 4;
 };
 
-randomCoordinates.forEach((coordinate) => {
-  const number = randomNumber();
-  const [i, j] = coordinate;
-  const oldTile = newBoard[i][j];
+const generateNewBoard = () => {
+  const newBoard = [];
+  for (let i = 0; i < 4; i++) {
+    const row = [];
+    for (let j = 0; j < 4; j++) {
+      const tile = {
+        value: 0,
+        id: id++,
+      };
 
-  newBoard[i][j] = {
-    value: number,
-    id: oldTile.id,
+      row.push(tile);
+    }
+    newBoard.push(row);
+  }
+
+  const generateRandomCoordinate = () => {
+    return [Math.floor(Math.random() * 4), Math.floor(Math.random() * 4)];
   };
-});
+
+  const coordinateOne = generateRandomCoordinate();
+  let coordinateTwo = generateRandomCoordinate();
+
+  while (
+    coordinateTwo[0] === coordinateOne[0] &&
+    coordinateTwo[1] === coordinateOne[1]
+  ) {
+    coordinateTwo = generateRandomCoordinate();
+  }
+
+  const randomCoordinates = [coordinateOne, coordinateTwo];
+
+  randomCoordinates.forEach((coordinate) => {
+    const number = randomNumber();
+    const [i, j] = coordinate;
+    const oldTile = newBoard[i][j];
+
+    newBoard[i][j] = {
+      value: number,
+      id: oldTile.id,
+    };
+  });
+  return newBoard;
+};
 // const bugBoard = generateGrid([
 //   [0, 0, 0, 0],
 //   [0, 0, 0, 0],
@@ -59,7 +65,7 @@ randomCoordinates.forEach((coordinate) => {
 // ]);
 
 const initialState = {
-  grid: newBoard,
+  grid: generateNewBoard(),
   score: 0,
   bestScore: null,
 };
@@ -334,6 +340,13 @@ const tiltRowRight = (row) => {
 
 const boardReducer = (state = initialState, action) => {
   switch (action.type) {
+    case RESTART_GAME: {
+      return {
+        grid: generateNewBoard(),
+        score: 0,
+        bestScore: null,
+      };
+    }
     case MOVE_DOWN: {
       const { grid, points } = tiltGridDown(state.grid);
 
