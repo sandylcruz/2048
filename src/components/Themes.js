@@ -4,7 +4,9 @@ export const lightTheme = {
   toggleBorder: "#FFF",
   background: "#363537",
   tiles: {
-    one: "#000000",
+    2: "#000",
+    4: "purple",
+    8: "000000",
   },
 };
 export const darkTheme = {
@@ -13,6 +15,8 @@ export const darkTheme = {
   toggleBorder: "#6B8096",
   background: "#999",
   tiles: {
-    one: "#ffffff",
+    2: "#ffffff",
+    4: "green",
+    8: "000000",
   },
 };

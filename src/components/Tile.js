@@ -10,32 +10,33 @@ const StyledContent = styled.div`
 `;
 
 const getColor = (theme, value) => {
-  if (value === 0) {
-    return "#ffffff";
-  } else if (value === 2) {
-    return theme.tiles.one;
-    return "#AED9E0";
-  } else if (value === 4) {
-    return "#9FA0C3";
-  } else if (value === 8) {
-    return "#8B687F";
-  } else if (value === 16) {
-    return "#7B435B";
-  } else if (value === 32) {
-    return "#1985a1";
-  } else if (value === 64) {
-    return "#";
-  } else if (value === 128) {
-    return "#70B7E3";
-  } else if (value === 256) {
-    return "#";
-  } else if (value === 512) {
-    return "#";
-  } else if (value === 1024) {
-    return "#";
-  } else {
-    return "";
-  }
+  return theme.tiles[value];
+  // if (value === 0) {
+  //   return "#ffffff";
+  // } else if (value === 2) {
+  //   return theme.tiles.one;
+  //   return "#AED9E0";
+  // } else if (value === 4) {
+  //   return "#9FA0C3";
+  // } else if (value === 8) {
+  //   return "#8B687F";
+  // } else if (value === 16) {
+  //   return "#7B435B";
+  // } else if (value === 32) {
+  //   return "#1985a1";
+  // } else if (value === 64) {
+  //   return "#";
+  // } else if (value === 128) {
+  //   return "#70B7E3";
+  // } else if (value === 256) {
+  //   return "#";
+  // } else if (value === 512) {
+  //   return "#";
+  // } else if (value === 1024) {
+  //   return "#";
+  // } else {
+  //   return "";
+  // }
 };
 
 const StyledTile = styled(motion.div)`
