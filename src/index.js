@@ -3,15 +3,18 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
 import App from "./components/App";
-import store from "./components/store";
 import { moveLeft } from "./actions/boardActions";
+import { PersistGate } from "redux-persist/integration/react";
+import store from "./components/store";
 
 window.addEventListener("DOMContentLoaded", () => {
   window.moveLeft = moveLeft;
 
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>,
     document.getElementById("root")
   );

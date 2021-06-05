@@ -11,17 +11,17 @@ const StyledContent = styled.div`
 
 const getColor = (value) => {
   if (value === 0) {
-    return "#FEFCEF";
+    return "#ffffff";
   } else if (value === 2) {
-    return "#FBE5DA";
+    return "#AED9E0";
   } else if (value === 4) {
-    return "#EFCCC6";
+    return "#9FA0C3";
   } else if (value === 8) {
-    return "#89CCDD";
+    return "#8B687F";
   } else if (value === 16) {
-    return "#70B7E3";
+    return "#7B435B";
   } else if (value === 32) {
-    return "#E9EAE4";
+    return "#1985a1";
   } else if (value === 64) {
     return "#";
   } else if (value === 128) {

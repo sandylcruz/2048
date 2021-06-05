@@ -5,7 +5,6 @@ import styled, { ThemeProvider } from "styled-components";
 import Game from "./Game";
 import GlobalStyle from "../GlobalStyle";
 import { lightTheme, darkTheme } from "./Themes";
-import { moveUp } from "../actions/boardActions";
 import { restartGame as restartGameAction } from "../actions/boardActions";
 import { selectPoints } from "../reducers/selectors";
 import Toggle from "./Toggle";
