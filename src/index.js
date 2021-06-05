@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import App from "./components/App";
 import { moveLeft } from "./actions/boardActions";
 import { PersistGate } from "redux-persist/integration/react";
-import store from "./components/store";
+import store, { persistor } from "./components/store";
 
 window.addEventListener("DOMContentLoaded", () => {
   window.moveLeft = moveLeft;

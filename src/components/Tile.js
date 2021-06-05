@@ -9,10 +9,11 @@ const StyledContent = styled.div`
   opacity: 1 !important;
 `;
 
-const getColor = (value) => {
+const getColor = (theme, value) => {
   if (value === 0) {
     return "#ffffff";
   } else if (value === 2) {
+    return theme.tiles.one;
     return "#AED9E0";
   } else if (value === 4) {
     return "#9FA0C3";
@@ -41,7 +42,7 @@ const StyledTile = styled(motion.div)`
   border: 5px solid #4a4e69;
   display: block;
   // background-color: ${({ value }) => (value === 0 ? "#e8e8e4" : "#a8dadc")};
-  background-color: ${({ value }) => getColor(value)};
+  background-color: ${({ value, theme }) => getColor(theme, value)};
   width: 100px;
   height: 100px;
   text-align: center;
