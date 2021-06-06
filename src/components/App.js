@@ -15,6 +15,7 @@ const AboveGame = styled.div`
   justify-content: space-between;
   margin-top: -50px;
   max-width: 400px;
+  height: 100%;
 `;
 
 const BodyDiv = styled.div`
@@ -22,6 +23,9 @@ const BodyDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0;
+  background-repeat: repeat-x;
+  background-attachment: fixed;
 `;
 
 const Container = styled.div``;

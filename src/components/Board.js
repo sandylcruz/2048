@@ -20,7 +20,6 @@ const BoardContainer = styled.div`
 const Div = styled.div`
   height: 410px;
   width: 410px;
-  // background-color: red;
   box-shadow: 0px 0px 10px 2px grey;
 `;
 
