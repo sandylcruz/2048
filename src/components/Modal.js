@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { restartGame as restartGameAction } from "../actions/boardActions";
@@ -52,7 +52,7 @@ const StyledFooter = styled(Footer)`
   justify-content: center;
 `;
 
-const Modal = ({}) => {
+const Modal = () => {
   const gameState = useSelector(selectCurrentGameState);
   const text = gameState === "won" ? "You won!" : "You lost!";
   const dispatch = useDispatch();

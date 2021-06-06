@@ -15,12 +15,14 @@ import {
 
 const BoardContainer = styled.div`
   position: absolute;
+  border-radius: 10px;
 `;
 
 const Div = styled.div`
   height: 410px;
   width: 410px;
   box-shadow: 0px 0px 10px 2px grey;
+  border-radius: 10px;
 `;
 
 const Board = React.memo(({ grid }) => {

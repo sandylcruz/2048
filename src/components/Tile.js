@@ -21,6 +21,7 @@ const StyledTile = styled(motion.div)`
   height: 100px;
   text-align: center;
   position: absolute;
+  border-radius: 6px;
 
   top: ${({ top }) => `${top}px`};
   left: ${({ left }) => `${left}px`};
