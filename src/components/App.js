@@ -17,16 +17,6 @@ const AboveGame = styled.div`
   max-width: 400px;
 `;
 
-const ArrowDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-`;
-
-const ArrowSpan = styled.div`
-  font-size: 40px;
-`;
-
 const BodyDiv = styled.div`
   height: 100%;
   display: flex;
@@ -78,12 +68,13 @@ const ScoreContainer = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  border: 1px solid black;
+  border: 2px solid grey;
   position: relative;
   float: right;
   padding: 5px;
   border-radius: 3px;
   height: 80px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
 `;
 
 const StyledGame = styled(Game)`
@@ -94,7 +85,7 @@ const StyledGame = styled(Game)`
 const StyledH1 = styled.h1`
   font-family: Helvetica;
   text-align: center;
-  font-size: 105px;
+  font-size: 125px;
 `;
 
 const StyledH3 = styled.h3`
@@ -131,7 +122,6 @@ const UnderGame = styled.div`
 const App = React.memo(() => {
   const score = useSelector(selectPoints);
   const dispatch = useDispatch();
-  // const gameStatus = useSelector(selectCurrentGameState);
   const [theme, setTheme] = useState("light");
 
   const themeToggler = () => {
@@ -161,7 +151,6 @@ const App = React.memo(() => {
               <p>
                 Join the numbers and get to the <strong>2048 tile!</strong>
               </p>
-
               <ToggleDiv>
                 <Toggle onChange={themeToggler}>Switch Theme</Toggle>
               </ToggleDiv>
@@ -170,16 +159,9 @@ const App = React.memo(() => {
           <StyledGame restartGame={restartGame} />
           <UnderGame>
             <RestartButton type="submit" onClick={restartGame}>
-              Restart game
+              New Game
             </RestartButton>
           </UnderGame>
-
-          {/* <ArrowDiv>
-            <ArrowSpan>&uarr;</ArrowSpan>
-            <ArrowSpan>&darr;</ArrowSpan>
-            <ArrowSpan>&rarr;</ArrowSpan>
-            <ArrowSpan>&darr;</ArrowSpan>
-          </ArrowDiv> */}
         </Container>
       </BodyDiv>
     </ThemeProvider>

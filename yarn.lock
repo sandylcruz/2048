@@ -1585,6 +1585,11 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
+"@popperjs/core@^2.4.4":
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
+  integrity sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
+
 "@rollup/plugin-node-resolve@^7.1.1":
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-7.1.3.tgz#80de384edfbd7bfc9101164910f86078151a3eca"
@@ -2297,6 +2302,24 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+"@zendeskgarden/container-buttongroup@^0.3.8":
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/container-buttongroup/-/container-buttongroup-0.3.9.tgz#6eaef4f5339db1f2a5d60dd66e28eaa6c6690855"
+  integrity sha512-ZT8z5+PfVe8sDARqCR3LIvjfeCgl9whDx1ORRtcS4ik1uGfcu1pl0gYmt8rjomDsAWYLcndLHQ51N2KPES0sFw==
+  dependencies:
+    "@babel/runtime" "^7.8.4"
+    "@zendeskgarden/container-selection" "^1.3.9"
+
+"@zendeskgarden/container-focusjail@^1.4.6":
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/container-focusjail/-/container-focusjail-1.4.6.tgz#256f2240f636561feca07e508f6718778b24e315"
+  integrity sha512-a4Y6B9qBKa1DzTzu3NPiF/h3JRnA50h2MF8V883jRV4gFOWhiR7izzM5Fa74aT+l/2/9mv+jYPr0U/IpOUBwCg==
+  dependencies:
+    "@babel/runtime" "^7.8.4"
+    "@zendeskgarden/container-utilities" "^0.5.5"
+    dom-helpers "^5.1.0"
+    tabbable "^5.0.0"
+
 "@zendeskgarden/container-focusvisible@^0.4.6":
   version "0.4.7"
   resolved "https://registry.yarnpkg.com/@zendeskgarden/container-focusvisible/-/container-focusvisible-0.4.7.tgz#4998ba0a9fa2064c9e217b8671fec7e216638000"
@@ -2304,12 +2327,71 @@
   dependencies:
     "@babel/runtime" "^7.8.4"
 
+"@zendeskgarden/container-keyboardfocus@^0.4.7":
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/container-keyboardfocus/-/container-keyboardfocus-0.4.8.tgz#b548194f0f330e87c514250946a00ba704721281"
+  integrity sha512-vTZGul116MjebU2Ir/AG3A7+J8yg175r1otrvZTb+uYVQrCV75uAAmboW+YwHMhBXXIq+qxcp+PS8N6zi02z4A==
+  dependencies:
+    "@babel/runtime" "^7.8.4"
+    "@zendeskgarden/container-utilities" "^0.5.5"
+
+"@zendeskgarden/container-modal@^0.8.7":
+  version "0.8.7"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/container-modal/-/container-modal-0.8.7.tgz#a606b5b942698506d7197c851aa3dfaeea464480"
+  integrity sha512-+lIiurgaeqfu/sKVgHMMTDAe6S8qjxyBFf3pqRxFf6KSehkai2KtccHuQay3IGBz3xwPAGMwgvqLbKB36lksMQ==
+  dependencies:
+    "@babel/runtime" "^7.8.4"
+    "@zendeskgarden/container-focusjail" "^1.4.6"
+    "@zendeskgarden/container-utilities" "^0.5.5"
+    react-uid "^2.2.0"
+
+"@zendeskgarden/container-selection@^1.3.9":
+  version "1.3.9"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/container-selection/-/container-selection-1.3.9.tgz#2e67299332b958d9c917c5caf1032ccd2c4de8e7"
+  integrity sha512-E1MjdoldbRIPiZLQN73Yj9N239chOwlLDLrKuLqF+CPqHFtxRxXxxAD+OZg4NJVocdNk0QDlnytBJSb3aUp46Q==
+  dependencies:
+    "@babel/runtime" "^7.8.4"
+    "@zendeskgarden/container-utilities" "^0.5.5"
+
 "@zendeskgarden/container-utilities@^0.5.5":
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/@zendeskgarden/container-utilities/-/container-utilities-0.5.5.tgz#c291e7c2454fe6a638afe947b51e74d56387fc79"
   integrity sha512-41qrK/ePXbPD+t2bKOtbzIZAjIlrIcN7EVGShPAjMjRzhQpZeX5UFsIrmN56/vQ8+xMVh/BxNEXgbtAO37FgwA==
   dependencies:
     "@babel/runtime" "^7.8.4"
+
+"@zendeskgarden/react-buttons@^8.37.1":
+  version "8.37.1"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/react-buttons/-/react-buttons-8.37.1.tgz#a1f6b5ebedd7154b2c4ef96f81bb6e381e684c37"
+  integrity sha512-umSsvJl7qB6ATQgat105lR8IHAyZHBrL2VwgCEXiclETJWhqkLpgpEaHgl9s/9RbOHB0VHIjOFW5DWr3jvf98Q==
+  dependencies:
+    "@zendeskgarden/container-buttongroup" "^0.3.8"
+    "@zendeskgarden/container-keyboardfocus" "^0.4.7"
+    polished "^4.0.0"
+    prop-types "^15.5.7"
+
+"@zendeskgarden/react-grid@^8.37.1":
+  version "8.37.1"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/react-grid/-/react-grid-8.37.1.tgz#0dbeaf60bc65e767aecd49d0eea74eafde5ece54"
+  integrity sha512-UhRrBWPXzslMdU7q039QcCivAXJmn06W3gZc+7ewB7z2rVgILT0DaqbeORCnHzej23DAGEasDwIycgj0qB4MPQ==
+  dependencies:
+    polished "^4.0.0"
+    prop-types "^15.5.7"
+
+"@zendeskgarden/react-modals@^8.37.1":
+  version "8.37.1"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/react-modals/-/react-modals-8.37.1.tgz#543eb7911c977fc84be494c1e7ce1d56596dc322"
+  integrity sha512-ssN2aVLBC5UgqJ4xE/pNLliVCqoR76S6sNda1NhSBvWVl9YUhdl2EemE73AiuevI8Qdb8tPB64jSF4okODErUQ==
+  dependencies:
+    "@popperjs/core" "^2.4.4"
+    "@zendeskgarden/container-focusvisible" "^0.4.6"
+    "@zendeskgarden/container-modal" "^0.8.7"
+    "@zendeskgarden/container-utilities" "^0.5.5"
+    dom-helpers "^5.1.0"
+    prop-types "^15.5.7"
+    react-merge-refs "^1.1.0"
+    react-popper "^2.2.3"
+    react-transition-group "^4.4.1"
 
 "@zendeskgarden/react-notifications@^8.37.1":
   version "8.37.1"
@@ -4340,7 +4422,7 @@ dom-converter@^0.2:
   dependencies:
     utila "~0.4"
 
-dom-helpers@^5.0.1:
+dom-helpers@^5.0.1, dom-helpers@^5.1.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-5.2.1.tgz#d9400536b2bf8225ad98fe052e029451ac40e902"
   integrity sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==
@@ -7250,7 +7332,7 @@ loglevel@^1.6.8:
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.7.1.tgz#005fde2f5e6e47068f935ff28573e125ef72f197"
   integrity sha512-Hesni4s5UkWkwCGJMQGAh71PaLUmKFM60dHvq0zi/vDhhrzuk+4GgNbTXJ12YYQJn6ZKBDNIjYcuQGKudvqrIw==
 
-loose-envify@^1.1.0, loose-envify@^1.4.0:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -9317,6 +9399,11 @@ react-error-overlay@^6.0.9:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
 
+react-fast-compare@^3.0.1:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
+  integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
+
 react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -9326,6 +9413,19 @@ react-is@^17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
+
+react-merge-refs@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-1.1.0.tgz#73d88b892c6c68cbb7a66e0800faa374f4c38b06"
+  integrity sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==
+
+react-popper@^2.2.3:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-2.2.5.tgz#1214ef3cec86330a171671a4fbcbeeb65ee58e96"
+  integrity sha512-kxGkS80eQGtLl18+uig1UIf9MKixFSyPxglsgLBxlYnyDf65BiY9B3nZSc6C9XUNDgStROB0fMQlTEz1KxGddw==
+  dependencies:
+    react-fast-compare "^3.0.1"
+    warning "^4.0.2"
 
 react-redux@^7.2.4:
   version "7.2.4"
@@ -9428,7 +9528,7 @@ react-transition-group@^4.4.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react-uid@^2.3.1:
+react-uid@^2.2.0, react-uid@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/react-uid/-/react-uid-2.3.1.tgz#22a75d4a948a4824b9b8078cbf864d55d91ca4be"
   integrity sha512-6C5pwNYP1udgp5feQ9MTBZBKD4su9nhD2aYCFY1bB0Bpask8wYKYz0ZhAtAJ4lcmTDC5kY1ByGTQMFDHQW6p0w==
@@ -10756,6 +10856,11 @@ symbol-tree@^3.2.4:
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
 
+tabbable@^5.0.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-5.2.0.tgz#4fba60991d8bb89d06e5d9455c92b453acf88fb2"
+  integrity sha512-0uyt8wbP0P3T4rrsfYg/5Rg3cIJ8Shl1RJ54QMqYxm1TLdWqJD1u6+RQjr2Lor3wmfT7JRHkirIwy99ydBsyPg==
+
 table@^6.0.4:
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/table/-/table-6.0.7.tgz#e45897ffbcc1bcf9e8a87bf420f2c9e5a7a52a34"
@@ -11363,6 +11468,13 @@ walker@^1.0.7, walker@~1.0.5:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
+
+warning@^4.0.2:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
+  integrity sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
+  dependencies:
+    loose-envify "^1.0.0"
 
 watchpack-chokidar2@^2.0.1:
   version "2.0.1"

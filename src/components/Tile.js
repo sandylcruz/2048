@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { motion } from "framer-motion";
@@ -11,38 +11,11 @@ const StyledContent = styled.div`
 
 const getColor = (theme, value) => {
   return theme.tiles[value];
-  // if (value === 0) {
-  //   return "#ffffff";
-  // } else if (value === 2) {
-  //   return theme.tiles.one;
-  //   return "#AED9E0";
-  // } else if (value === 4) {
-  //   return "#9FA0C3";
-  // } else if (value === 8) {
-  //   return "#8B687F";
-  // } else if (value === 16) {
-  //   return "#7B435B";
-  // } else if (value === 32) {
-  //   return "#1985a1";
-  // } else if (value === 64) {
-  //   return "#";
-  // } else if (value === 128) {
-  //   return "#70B7E3";
-  // } else if (value === 256) {
-  //   return "#";
-  // } else if (value === 512) {
-  //   return "#";
-  // } else if (value === 1024) {
-  //   return "#";
-  // } else {
-  //   return "";
-  // }
 };
 
 const StyledTile = styled(motion.div)`
   border: 5px solid #4a4e69;
   display: block;
-  // background-color: ${({ value }) => (value === 0 ? "#e8e8e4" : "#a8dadc")};
   background-color: ${({ value, theme }) => getColor(theme, value)};
   width: 100px;
   height: 100px;
