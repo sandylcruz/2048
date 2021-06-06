@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { restartGame as restartGameAction } from "../actions/boardActions";
 import {
   Modal as ZendeskModal,
-  Body,
   Footer,
   FooterItem,
-  Close,
 } from "@zendeskgarden/react-modals";
 import { Row, Col } from "@zendeskgarden/react-grid";
 import styled from "styled-components";
