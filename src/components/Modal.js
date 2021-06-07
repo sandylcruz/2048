@@ -68,7 +68,9 @@ const Modal = () => {
           <StyledBody>{text}</StyledBody>
           <StyledFooter>
             <FooterItem>
-              <RestartButton onClick={restartGame}>Try Again</RestartButton>
+              <RestartButton onClick={restartGame} aria-label="restart">
+                Try Again
+              </RestartButton>
             </FooterItem>
           </StyledFooter>
         </ZendeskModal>

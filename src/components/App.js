@@ -164,7 +164,11 @@ const App = React.memo(() => {
           </TextDiv>
           <StyledGame restartGame={restartGame} />
           <UnderGame>
-            <RestartButton type="submit" onClick={restartGame}>
+            <RestartButton
+              type="submit"
+              onClick={restartGame}
+              aria-label="Restart"
+            >
               New Game
             </RestartButton>
           </UnderGame>
