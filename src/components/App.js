@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled, { ThemeProvider } from "styled-components";
 
 import Game from "./Game";
+import github from "./github.png";
 import GlobalStyle from "../GlobalStyle";
 import { lightTheme, darkTheme } from "./Themes";
 import { restartGame as restartGameAction } from "../actions/boardActions";
@@ -46,7 +47,8 @@ const RestartButton = styled.button`
   box-sizing: border-box;
   font-weight: bolder;
   color: white;
-  height: 40px;
+  height: 50px;
+  width: 110px;
   outline: none;
   box-shadow: none;
 
@@ -119,9 +121,10 @@ const ToggleDiv = styled.div`
 const UnderGame = styled.div`
   margin-top: 30px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
   max-width: 400px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const App = React.memo(() => {
@@ -170,6 +173,9 @@ const App = React.memo(() => {
             >
               New Game
             </RestartButton>
+            <a href="https://github.com/sandylcruz/2048">
+              <img src={github} alt="github" width="70px"></img>
+            </a>
           </UnderGame>
         </Container>
       </BodyDiv>

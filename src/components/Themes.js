@@ -2,7 +2,7 @@ export const lightTheme = {
   body: "#4158D0",
   gradient: "linear-gradient(#dae2f8, #d6a4a4)",
   h1: "purple",
-  text: "#363537",
+  text: "#323232",
   toggleBorder: "#FFF",
   color: "#6B9080",
   tiles: {

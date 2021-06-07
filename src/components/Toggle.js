@@ -50,6 +50,9 @@ const CheckBox = styled.input`
       transition: 0.2s;
     }
   }
+  &:focus + ${CheckBoxLabel} {
+    border: 2px solid rgb(204, 51, 64);
+  }
 `;
 
 const Toggle = ({ onChange }) => {
