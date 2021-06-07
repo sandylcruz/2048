@@ -13,7 +13,7 @@ const AboveGame = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: -55px;
+  margin-top: -85px;
   max-width: 400px;
   height: 100%;
 `;
@@ -108,7 +108,6 @@ const TextDiv = styled.div``;
 
 const TitleContainer = styled.div`
   display: flex;
-  // height: 200px;
 `;
 
 const ToggleDiv = styled.div`

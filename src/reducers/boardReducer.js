@@ -57,12 +57,6 @@ const generateNewBoard = () => {
   });
   return newBoard;
 };
-// const bugBoard = generateGrid([
-//   [0, 0, 0, 0],
-//   [0, 0, 0, 0],
-//   [0, 8, 0, 0],
-//   [8, 16, 0, 16],
-// ]);
 
 const initialState = {
   grid: generateNewBoard(),

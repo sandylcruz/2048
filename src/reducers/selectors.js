@@ -59,19 +59,6 @@ export const selectCurrentGameState = createSelector(
       });
     });
 
-    // const hasMovesLeft = grid.some((row, i) => {
-    //   return row.some((tile, j) => {
-    //     const neighborCoordinates = getNeighborCoordinates([i, j], grid.length);
-
-    //     return neighborCoordinates.some((coordinate) => {
-    //       const [x, y] = coordinate;
-    //       const neighborValue = grid[x][y].value;
-
-    //       return neighborValue === tile.value;
-    //     });
-    //   });
-    // });
-
     return hasMovesLeft ? "active" : "lost";
   }
 );
