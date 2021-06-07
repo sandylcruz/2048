@@ -15,7 +15,7 @@ const RestartButton = styled.button`
   background-color: rgb(204, 51, 64);
   text-decoration: none;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 10px;
   box-sizing: border-box;
   font-weight: bolder;
   color: white;

@@ -13,7 +13,7 @@ const AboveGame = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: -50px;
+  margin-top: -55px;
   max-width: 400px;
   height: 100%;
 `;
@@ -42,7 +42,7 @@ const RestartButton = styled.button`
   background-color: rgb(204, 51, 64);
   text-decoration: none;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 10px;
   box-sizing: border-box;
   font-weight: bolder;
   color: white;
@@ -76,7 +76,7 @@ const ScoreContainer = styled.div`
   position: relative;
   float: right;
   padding: 5px;
-  border-radius: 3px;
+  border-radius: 10px;
   height: 80px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
 `;
@@ -89,7 +89,8 @@ const StyledGame = styled(Game)`
 const StyledH1 = styled.h1`
   font-family: Helvetica;
   text-align: center;
-  font-size: 125px;
+  font-size: 132px;
+  color: "#ff007f";
 `;
 
 const StyledH3 = styled.h3`
@@ -107,6 +108,7 @@ const TextDiv = styled.div``;
 
 const TitleContainer = styled.div`
   display: flex;
+  // height: 200px;
 `;
 
 const ToggleDiv = styled.div`
@@ -116,7 +118,7 @@ const ToggleDiv = styled.div`
 `;
 
 const UnderGame = styled.div`
-  margin-top: 20px;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;

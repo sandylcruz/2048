@@ -1,27 +1,10 @@
 export const lightTheme = {
   body: "#4158D0",
-  // gradient: "linear-gradient(#c2e59c, #64b3f4)",
   gradient: "linear-gradient(#dae2f8, #d6a4a4)",
-  // gradient: "linear-gradient(#f8cdda, #1d2b6a)",
-
   h1: "purple",
   text: "#363537",
   toggleBorder: "#FFF",
   color: "#6B9080",
-  // tiles: {
-  //   0: "white",
-  //   2: "#DAE2F8",
-  //   4: "#D6A4A4",
-  //   8: "#DADCF0",
-  //   16: "#D6AAAC",
-  //   32: "#D9D7E9",
-  //   64: "#D7AFB3",
-  //   128: "#D8C6D2",
-  //   256: "#D7B5BB",
-  //   512: "#D8C0CA",
-  //   1024: "#D7BBC3",
-  //   2048: "#F8EDEB",
-  // },
   tiles: {
     0: "white",
     2: "#B0A3E1",
@@ -38,9 +21,7 @@ export const lightTheme = {
   },
 };
 export const darkTheme = {
-  // body: "#363537",
   gradient: "linear-gradient(#232526, #66697D)",
-
   text: "#FAFAFA",
   toggleBorder: "#6B8096",
   background: "#purple",

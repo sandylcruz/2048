@@ -56,7 +56,12 @@ const Toggle = ({ onChange }) => {
   return (
     <div>
       <CheckBoxWrapper>
-        <CheckBox id="checkbox" type="checkbox" onChange={onChange} />
+        <CheckBox
+          id="checkbox"
+          type="checkbox"
+          onChange={onChange}
+          aria-label="Toggle dark and light mode"
+        />
         <CheckBoxLabel htmlFor="checkbox" />
       </CheckBoxWrapper>
     </div>
