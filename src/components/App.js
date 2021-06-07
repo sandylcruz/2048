@@ -173,7 +173,11 @@ const App = React.memo(() => {
             >
               New Game
             </RestartButton>
-            <a href="https://github.com/sandylcruz/2048">
+            <a
+              href="https://github.com/sandylcruz/2048"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img src={github} alt="github" width="70px"></img>
             </a>
           </UnderGame>
