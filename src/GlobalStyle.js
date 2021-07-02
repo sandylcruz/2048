@@ -13,7 +13,8 @@ const GlobalStyle = createGlobalStyle`
     background: ${({ theme }) => theme.gradient};
     color: ${({ theme }) => theme.text};
     transition: all 0.20s linear;
-    font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "open sans extra bold", helvetica, arial, sans serif;
+    // font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 `;
 
