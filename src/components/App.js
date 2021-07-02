@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styled, { ThemeProvider } from "styled-components";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled, { ThemeProvider } from 'styled-components';
 
-import Game from "./Game";
-import github from "./github.png";
-import GlobalStyle from "../GlobalStyle";
-import { lightTheme, darkTheme } from "./Themes";
-import { restartGame as restartGameAction } from "../actions/boardActions";
-import { selectPoints } from "../reducers/selectors";
-import Toggle from "./Toggle";
+import Game from './Game';
+import github from './github.png';
+import GlobalStyle from '../GlobalStyle';
+import { lightTheme, darkTheme } from './Themes';
+import { restartGame as restartGameAction } from '../actions/boardActions';
+import { selectPoints } from '../reducers/selectors';
+import Toggle from './Toggle';
 
 const AboveGame = styled.div`
   display: flex;
@@ -92,7 +92,7 @@ const StyledH1 = styled.h1`
   font-family: Helvetica;
   text-align: center;
   font-size: 132px;
-  color: "#ff007f";
+  color: '#ff007f';
 `;
 
 const StyledH3 = styled.h3`
@@ -121,7 +121,7 @@ const ToggleDiv = styled.div`
 const UnderGame = styled.div`
   margin-top: 30px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   max-width: 400px;
   justify-content: center;
   align-items: center;
@@ -130,10 +130,10 @@ const UnderGame = styled.div`
 const App = React.memo(() => {
   const score = useSelector(selectPoints);
   const dispatch = useDispatch();
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState('light');
 
   const themeToggler = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
+    theme === 'light' ? setTheme('dark') : setTheme('light');
   };
 
   const restartGame = () => {
@@ -141,7 +141,7 @@ const App = React.memo(() => {
   };
 
   return (
-    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <BodyDiv>
         <Container>
           <GlobalStyle />
