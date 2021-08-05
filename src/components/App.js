@@ -130,7 +130,7 @@ const UnderGame = styled.div`
 const App = React.memo(() => {
   const score = useSelector(selectPoints);
   const dispatch = useDispatch();
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
 
   const themeToggler = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light');
